@@ -988,8 +988,8 @@ insert into state
 	(title)
 values
 	('pending'),
-    ('in flight'),
-    ('arrived');
+	('in flight'),
+	('arrived');
 
 insert into post 
 	(title, salary) 
