@@ -999,20 +999,20 @@ values
 	('Flight attendant', 5000),
 	('Flight engineer', 8000),
 
-    ('Escort agent', 4000),
-    ('Aviation security specialist', 7000),
-    ('Technician', 5000),
-    ('Adjuster', 5000),
-    ('Equipment engineer', 6000),
-    ('Maintenance manager', 5000),
-    ('Cleaner', 2000),
+	('Escort agent', 4000),
+	('Aviation security specialist', 7000),
+	('Technician', 5000),
+	('Adjuster', 5000),
+	('Equipment engineer', 6000),
+	('Maintenance manager', 5000),
+	('Cleaner', 2000),
 	('Clinical Specialist', 5000),
-    
+
 	('Traffic controller', 7000),
 	('Registration agent', 4000),
-    ('Airline manager', 6000),
-    ('Passport control specialist', 5000),
-    ('IT specialist', 7000),
+	('Airline manager', 6000),
+	('Passport control specialist', 5000),
+	('IT specialist', 7000),
 	('Customs officer', 7000);
 	
 insert into plane 
