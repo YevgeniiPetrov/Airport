@@ -11,8 +11,8 @@ create table passenger (
 	first_name varchar(32) not null,
 	last_name varchar(32) not null,
 	birth_date date not null,
-    passport varchar(16) not null,
-    removed boolean,
+	passport varchar(16) not null,
+	removed boolean,
 	primary key(id)
 );
 
@@ -23,11 +23,11 @@ create table ticket (
 	number int not null,
 	place int not null,
 	passenger_id int not null,
-    removed boolean,
+	removed boolean,
 	primary key(id),
-    foreign key(passenger_id) references passenger(id)
+	foreign key(passenger_id) references passenger(id)
 		on update cascade
-        on delete restrict
+		on delete restrict
 );
 
 drop table if exists flight;
@@ -35,9 +35,9 @@ drop table if exists flight;
 create table flight (
 	id int auto_increment not null,
 	departure time not null,
-    arrival time not null,
-    removed boolean,
-    primary key(id)
+	arrival time not null,
+	removed boolean,
+	primary key(id)
 );
 
 alter table ticket
@@ -47,16 +47,16 @@ alter table ticket
 add constraint fk_ticket_flight
 	foreign key(flight_id) references flight(id)
 		on update cascade
-        on delete restrict;
+		on delete restrict;
 
 drop table if exists route;
 
 create table route (
 	id int auto_increment not null,
 	from_point varchar(32) not null,
-    to_point varchar(32) not null,
-    removed boolean,
-    primary key(id)
+	to_point varchar(32) not null,
+	removed boolean,
+	primary key(id)
 );
 
 alter table flight
@@ -66,16 +66,16 @@ alter table flight
 add constraint fk_flight_route
 	foreign key(route_id) references route(id)
 		on update cascade
-        on delete restrict;
+		on delete restrict;
         
 drop table if exists airline;
 
 create table airline (
 	id int auto_increment not null,
 	title varchar(32) not null,
-    rating decimal(3, 2) not null,
-    removed boolean,
-    primary key(id)
+	rating decimal(3, 2) not null,
+	removed boolean,
+	primary key(id)
 );
 
 drop table if exists flight_airline;
@@ -83,13 +83,13 @@ drop table if exists flight_airline;
 create table flight_airline (
 	flight_id int not null,
 	airline_id int not null,
-    primary key(flight_id, airline_id),
-    foreign key(flight_id) references flight(id)
+	primary key(flight_id, airline_id),
+	foreign key(flight_id) references flight(id)
 		on update cascade
-        on delete restrict,
+		on delete restrict,
 	foreign key(airline_id) references airline(id)
 		on update cascade
-        on delete restrict
+		on delete restrict
 );
         
 drop table if exists state;
@@ -97,8 +97,8 @@ drop table if exists state;
 create table state (
 	id int auto_increment not null,
 	title varchar(32) not null,
-    removed boolean,
-    primary key(id)
+	removed boolean,
+	primary key(id)
 );
 
 alter table flight
@@ -108,33 +108,33 @@ alter table flight
 add constraint fk_flight_state
 	foreign key(state_id) references state(id)
 		on update cascade
-        on delete restrict;
+		on delete restrict;
         
 drop table if exists flight_passenger;
 
 create table flight_passenger (
 	flight_id int not null,
 	passenger_id int not null,
-    primary key(flight_id, passenger_id),
-    foreign key(flight_id) references flight(id)
+	primary key(flight_id, passenger_id),
+	foreign key(flight_id) references flight(id)
 		on update cascade
-        on delete restrict,
+		on delete restrict,
 	foreign key(passenger_id) references passenger(id)
 		on update cascade
-        on delete restrict
+		on delete restrict
 );
 
 drop table if exists plane;
 
 create table plane (
 	id int auto_increment not null,
-    airline_id int not null,
+	airline_id int not null,
 	title varchar(32) not null,
-    removed boolean,
-    primary key(id),
-    foreign key(airline_id) references airline(id)
+	removed boolean,
+	primary key(id),
+	foreign key(airline_id) references airline(id)
 		on update cascade
-        on delete restrict
+		on delete restrict
 );
 
 drop table if exists post;
@@ -153,12 +153,12 @@ create table employee (
 	first_name varchar(32) not null,
 	last_name varchar(32) not null,
 	birth_date date not null,
-    post_id int not null,
-    removed boolean,
+	post_id int not null,
+	removed boolean,
 	primary key(id),
-    foreign key(post_id) references post(id)
+	foreign key(post_id) references post(id)
 		on update cascade
-        on delete restrict
+		on delete restrict
 );
 
 drop table if exists plane_employee;
@@ -166,13 +166,13 @@ drop table if exists plane_employee;
 create table plane_employee (
 	plane_id int not null,
 	employee_id int not null,
-    primary key(plane_id, employee_id),
-    foreign key(plane_id) references plane(id)
+	primary key(plane_id, employee_id),
+	foreign key(plane_id) references plane(id)
 		on update cascade
-        on delete restrict,
+		on delete restrict,
 	foreign key(employee_id) references employee(id)
 		on update cascade
-        on delete restrict
+		on delete restrict
 );
 
 drop table if exists terminal;
@@ -180,8 +180,8 @@ drop table if exists terminal;
 create table terminal (
 	id int auto_increment not null,
 	title varchar(32) not null,
-    removed boolean,
-    primary key(id)
+	removed boolean,
+	primary key(id)
 );
 
 drop table if exists flight_terminal;
@@ -189,13 +189,13 @@ drop table if exists flight_terminal;
 create table flight_terminal (
 	flight_id int not null,
 	terminal_id int not null,
-    primary key(flight_id, terminal_id),
-    foreign key(flight_id) references flight(id)
+	primary key(flight_id, terminal_id),
+	foreign key(flight_id) references flight(id)
 		on update cascade
-        on delete restrict,
+		on delete restrict,
 	foreign key(terminal_id) references terminal(id)
 		on update cascade
-        on delete restrict
+		on delete restrict
 );
 
 drop table if exists terminal_employee;
@@ -203,13 +203,13 @@ drop table if exists terminal_employee;
 create table terminal_employee (
 	terminal_id int not null,
 	employee_id int not null,
-    primary key(terminal_id, employee_id),
-    foreign key(terminal_id) references terminal(id)
+	primary key(terminal_id, employee_id),
+	foreign key(terminal_id) references terminal(id)
 		on update cascade
-        on delete restrict,
+		on delete restrict,
 	foreign key(employee_id) references employee(id)
 		on update cascade
-        on delete restrict
+		on delete restrict
 );
 
 insert into passenger
