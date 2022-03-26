@@ -86,10 +86,10 @@ create table flight_airline (
 	primary key(flight_id, airline_id),
 	foreign key(flight_id) references flight(id)
 		on update cascade
-		on delete restrict,
+		on delete cascade,
 	foreign key(airline_id) references airline(id)
 		on update cascade
-		on delete restrict
+		on delete cascade
 );
         
 drop table if exists state;
@@ -118,10 +118,10 @@ create table flight_passenger (
 	primary key(flight_id, passenger_id),
 	foreign key(flight_id) references flight(id)
 		on update cascade
-		on delete restrict,
+		on delete cascade,
 	foreign key(passenger_id) references passenger(id)
 		on update cascade
-		on delete restrict
+		on delete cascade
 );
 
 drop table if exists plane;
@@ -143,6 +143,7 @@ create table post (
 	id int auto_increment not null,
 	title varchar(32) unique not null,
 	salary int not null,
+	removed boolean,
 	primary key(id)
 );
 
@@ -169,10 +170,10 @@ create table plane_employee (
 	primary key(plane_id, employee_id),
 	foreign key(plane_id) references plane(id)
 		on update cascade
-		on delete restrict,
+		on delete cascade,
 	foreign key(employee_id) references employee(id)
 		on update cascade
-		on delete restrict
+		on delete cascade
 );
 
 drop table if exists terminal;
@@ -192,10 +193,10 @@ create table flight_terminal (
 	primary key(flight_id, terminal_id),
 	foreign key(flight_id) references flight(id)
 		on update cascade
-		on delete restrict,
+		on delete cascade,
 	foreign key(terminal_id) references terminal(id)
 		on update cascade
-		on delete restrict
+		on delete cascade
 );
 
 drop table if exists terminal_employee;
@@ -206,10 +207,10 @@ create table terminal_employee (
 	primary key(terminal_id, employee_id),
 	foreign key(terminal_id) references terminal(id)
 		on update cascade
-		on delete restrict,
+		on delete cascade,
 	foreign key(employee_id) references employee(id)
 		on update cascade
-		on delete restrict
+		on delete cascade
 );
 
 insert into passenger
