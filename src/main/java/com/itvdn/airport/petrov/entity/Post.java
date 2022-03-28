@@ -1,11 +1,11 @@
 package com.itvdn.airport.petrov.entity;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,8 +16,12 @@ import javax.persistence.Id;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private int id;
     private String title;
     private Double salary;
     private Boolean removed;
+    @OneToMany(mappedBy = "post")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Employee> employees;
 }

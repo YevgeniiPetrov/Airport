@@ -5,9 +5,10 @@ public interface DAOFactory {
     EmployeeDAO getEmployeeDAO();
     FlightDAO getFlightDAO();
     PassengerDAO getPassengerDAO();
+    PlaneDAO getPlaneDAO();
     PostDAO getPostDAO();
     RouteDAO getRouteDAO();
-    StateDAO getSTateDAO();
+    StateDAO getStateDAO();
     TerminalDAO getTerminalDAO();
     TicketDAO getTicketDAO();
 }

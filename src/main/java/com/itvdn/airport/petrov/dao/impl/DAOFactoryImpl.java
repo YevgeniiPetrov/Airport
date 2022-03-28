@@ -24,6 +24,11 @@ public class DAOFactoryImpl implements DAOFactory {
     }
 
     @Override
+    public PlaneDAO getPlaneDAO() {
+        return new PlaneDAOImpl();
+    }
+
+    @Override
     public PostDAO getPostDAO() {
         return new PostDAOImpl();
     }
@@ -34,7 +39,7 @@ public class DAOFactoryImpl implements DAOFactory {
     }
 
     @Override
-    public StateDAO getSTateDAO() {
+    public StateDAO getStateDAO() {
         return new StateDAOImpl();
     }
 

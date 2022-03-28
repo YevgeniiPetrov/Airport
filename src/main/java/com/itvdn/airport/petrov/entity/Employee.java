@@ -1,6 +1,8 @@
 package com.itvdn.airport.petrov.entity;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,6 +17,7 @@ import java.util.List;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private int id;
     @Column(name = "first_name")
     private String firstName;
@@ -25,7 +28,8 @@ public class Employee {
     private Boolean removed;
     @ManyToOne(targetEntity = Post.class)
     private Post post;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             name = "terminal_employee",
             joinColumns = {
@@ -36,4 +40,16 @@ public class Employee {
             }
     )
     private List<Terminal> terminals;
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(
+            name = "plane_employee",
+            joinColumns = {
+                    @JoinColumn(name = "employee_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "plane_id")
+            }
+    )
+    private List<Plane> planes;
 }

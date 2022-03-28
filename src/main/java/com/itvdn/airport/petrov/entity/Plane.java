@@ -13,35 +13,25 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Terminal {
+public class Plane {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private int id;
+    @ManyToOne(targetEntity = Airline.class)
+    private Airline airline;
     private String title;
     private Boolean removed;
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
-            name = "terminal_employee",
+            name = "plane_employee",
             joinColumns = {
-                    @JoinColumn(name = "terminal_id")
+                    @JoinColumn(name = "plane_id")
             },
             inverseJoinColumns = {
                     @JoinColumn(name = "employee_id")
             }
     )
     private List<Employee> employees;
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(
-            name = "flight_terminal",
-            joinColumns = {
-                    @JoinColumn(name = "terminal_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "flight_id")
-            }
-    )
-    private List<Flight> flights;
 }

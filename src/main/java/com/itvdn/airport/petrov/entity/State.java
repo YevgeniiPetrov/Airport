@@ -1,6 +1,8 @@
 package com.itvdn.airport.petrov.entity;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,9 +16,11 @@ import java.util.List;
 public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private int id;
     private String title;
     private Boolean removed;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "state")
+    @OneToMany(mappedBy = "state")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Flight> flights;
 }
