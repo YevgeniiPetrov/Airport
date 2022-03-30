@@ -45,4 +45,14 @@ public class TestPassengerDAO {
     void testGetAll() {
         Assertions.assertTrue(TestDAO.testGetAll(DAO));
     }
+
+    @Test
+    void testGetAllArrivedByCriteria() {
+        Assertions.assertDoesNotThrow(DAO::getAllArrivedByCriteria);
+    }
+
+    @Test
+    void testGetAllArrivedByHQL() {
+        Assertions.assertDoesNotThrow(DAO::getAllArrivedByHQL);
+    }
 }
