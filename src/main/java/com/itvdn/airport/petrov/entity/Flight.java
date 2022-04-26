@@ -1,8 +1,6 @@
 package com.itvdn.airport.petrov.entity;
 
 import lombok.*;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalTime;
@@ -26,11 +24,9 @@ public class Flight {
     private Route route;
     @ManyToOne(targetEntity = State.class)
     private State state;
-    @OneToMany(mappedBy = "flight")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "flight")
     private List<Ticket> tickets;
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "flight_airline",
             joinColumns = {
@@ -41,8 +37,7 @@ public class Flight {
             }
     )
     private List<Airline> airlines;
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "flight_passenger",
             joinColumns = {
@@ -53,8 +48,7 @@ public class Flight {
             }
     )
     private List<Passenger> passengers;
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "flight_terminal",
             joinColumns = {

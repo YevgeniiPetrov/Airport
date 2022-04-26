@@ -1,8 +1,6 @@
 package com.itvdn.airport.petrov.entity;
 
 import lombok.*;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,7 +19,6 @@ public class Post {
     private String title;
     private Double salary;
     private Boolean removed;
-    @OneToMany(mappedBy = "post")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "post")
     private List<Employee> employees;
 }

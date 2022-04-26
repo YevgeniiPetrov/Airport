@@ -8,18 +8,18 @@ import java.util.List;
 
 public class RouteDAOImpl implements RouteDAO {
     @Override
-    public Route get(int id) {
-        return DataBase.get(id, Route.class);
+    public Route get(int id, String... getters) {
+        return new DataBase<Route>().get(id, Route.class, getters);
     }
 
     @Override
     public boolean delete(Route object) {
-        DataBase.delete(object);
+        new DataBase<Route>().delete(object);
         return get(object.getId()) == null;
     }
 
     @Override
-    public List<Route> getAll() {
-        return DataBase.getAll(Route.class);
+    public List<Route> getAll(String... fields) {
+        return new DataBase<Route>().getAll(Route.class, fields);
     }
 }

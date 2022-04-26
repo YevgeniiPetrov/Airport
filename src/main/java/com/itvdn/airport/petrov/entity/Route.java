@@ -1,8 +1,6 @@
 package com.itvdn.airport.petrov.entity;
 
 import lombok.*;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,7 +21,6 @@ public class Route {
     @Column(name = "to_point")
     private String to;
     private Boolean removed;
-    @OneToMany(mappedBy = "route")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "route")
     private List<Flight> flights;
 }

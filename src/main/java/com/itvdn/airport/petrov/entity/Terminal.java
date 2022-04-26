@@ -1,8 +1,6 @@
 package com.itvdn.airport.petrov.entity;
 
 import lombok.*;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,8 +18,7 @@ public class Terminal {
     private int id;
     private String title;
     private Boolean removed;
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "terminal_employee",
             joinColumns = {
@@ -32,8 +29,7 @@ public class Terminal {
             }
     )
     private List<Employee> employees;
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "flight_terminal",
             joinColumns = {

@@ -8,18 +8,18 @@ import java.util.List;
 
 public class PlaneDAOImpl implements PlaneDAO {
     @Override
-    public Plane get(int id) {
-        return DataBase.get(id, Plane.class);
+    public Plane get(int id, String... getters) {
+        return new DataBase<Plane>().get(id, Plane.class, getters);
     }
 
     @Override
     public boolean delete(Plane object) {
-        DataBase.delete(object);
+        new DataBase<Plane>().delete(object);
         return get(object.getId()) == null;
     }
 
     @Override
-    public List<Plane> getAll() {
-        return DataBase.getAll(Plane.class);
+    public List<Plane> getAll(String... fields) {
+        return new DataBase<Plane>().getAll(Plane.class, fields);
     }
 }

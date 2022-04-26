@@ -8,18 +8,18 @@ import java.util.List;
 
 public class StateDAOImpl implements StateDAO {
     @Override
-    public State get(int id) {
-        return DataBase.get(id, State.class);
+    public State get(int id, String... getters) {
+        return new DataBase<State>().get(id, State.class, getters);
     }
 
     @Override
     public boolean delete(State object) {
-        DataBase.delete(object);
+        new DataBase<State>().delete(object);
         return get(object.getId()) == null;
     }
 
     @Override
-    public List<State> getAll() {
-        return DataBase.getAll(State.class);
+    public List<State> getAll(String... fields) {
+        return new DataBase<State>().getAll(State.class, fields);
     }
 }

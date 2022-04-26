@@ -1,8 +1,6 @@
 package com.itvdn.airport.petrov.entity;
 
 import lombok.*;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,8 +19,7 @@ public class Airline {
     private String title;
     private Double rating;
     private Boolean removed;
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "flight_airline",
             joinColumns = {
@@ -33,7 +30,6 @@ public class Airline {
             }
     )
     private List<Flight> flights;
-    @OneToMany(mappedBy = "airline")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "airline")
     private List<Plane> planes;
 }

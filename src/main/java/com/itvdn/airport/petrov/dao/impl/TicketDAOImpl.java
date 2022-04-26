@@ -8,18 +8,18 @@ import java.util.List;
 
 public class TicketDAOImpl implements TicketDAO {
     @Override
-    public Ticket get(int id) {
-        return DataBase.get(id, Ticket.class);
+    public Ticket get(int id, String... getters) {
+        return new DataBase<Ticket>().get(id, Ticket.class, getters);
     }
 
     @Override
     public boolean delete(Ticket object) {
-        DataBase.delete(object);
+        new DataBase<Ticket>().delete(object);
         return get(object.getId()) == null;
     }
 
     @Override
-    public List<Ticket> getAll() {
-        return DataBase.getAll(Ticket.class);
+    public List<Ticket> getAll(String... fields) {
+        return new DataBase<Ticket>().getAll(Ticket.class, fields);
     }
 }

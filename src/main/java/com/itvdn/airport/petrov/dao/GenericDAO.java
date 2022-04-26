@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface GenericDAO<T> {
     default T add(T object) {
-        return DataBase.add(object);
+        return new DataBase<T>().add(object);
     }
 
-    T get(int id);
+    T get(int id, String... getters);
 
     default T update(T object) {
-        return DataBase.update(object);
+        return new DataBase<T>().update(object);
     }
 
     boolean delete(T object);
-    List<T> getAll();
+    List<T> getAll(String... fields);
 }

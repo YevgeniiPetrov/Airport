@@ -8,18 +8,18 @@ import java.util.List;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
-    public Employee get(int id) {
-        return DataBase.get(id, Employee.class);
+    public Employee get(int id, String... getters) {
+        return new DataBase<Employee>().get(id, Employee.class, getters);
     }
 
     @Override
     public boolean delete(Employee object) {
-        DataBase.delete(object);
+        new DataBase<Employee>().delete(object);
         return get(object.getId()) == null;
     }
 
     @Override
-    public List<Employee> getAll() {
-        return DataBase.getAll(Employee.class);
+    public List<Employee> getAll(String... fields) {
+        return new DataBase<Employee>().getAll(Employee.class, fields);
     }
 }

@@ -8,18 +8,18 @@ import java.util.List;
 
 public class PostDAOImpl implements PostDAO {
     @Override
-    public Post get(int id) {
-        return DataBase.get(id, Post.class);
+    public Post get(int id, String... getters) {
+        return new DataBase<Post>().get(id, Post.class, getters);
     }
 
     @Override
     public boolean delete(Post object) {
-        DataBase.delete(object);
+        new DataBase<Post>().delete(object);
         return get(object.getId()) == null;
     }
 
     @Override
-    public List<Post> getAll() {
-        return DataBase.getAll(Post.class);
+    public List<Post> getAll(String... fields) {
+        return new DataBase<Post>().getAll(Post.class, fields);
     }
 }

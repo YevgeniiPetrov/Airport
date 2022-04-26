@@ -8,18 +8,18 @@ import java.util.List;
 
 public class FlightDAOImpl implements FlightDAO {
     @Override
-    public Flight get(int id) {
-        return DataBase.get(id, Flight.class);
+    public Flight get(int id, String... getters) {
+        return new DataBase<Flight>().get(id, Flight.class, getters);
     }
 
     @Override
     public boolean delete(Flight object) {
-        DataBase.delete(object);
+        new DataBase<Flight>().delete(object);
         return get(object.getId()) == null;
     }
 
     @Override
-    public List<Flight> getAll() {
-        return DataBase.getAll(Flight.class);
+    public List<Flight> getAll(String... fields) {
+        return new DataBase<Flight>().getAll(Flight.class, fields);
     }
 }
