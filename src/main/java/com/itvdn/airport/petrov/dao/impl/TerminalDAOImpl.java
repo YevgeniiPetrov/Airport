@@ -5,21 +5,22 @@ import com.itvdn.airport.petrov.dao.TerminalDAO;
 import com.itvdn.airport.petrov.entity.Terminal;
 
 import java.util.List;
+import java.util.Optional;
 
 public class TerminalDAOImpl implements TerminalDAO {
     @Override
-    public Terminal get(int id, String... getters) {
+    public Optional<Terminal> get(int id, String... getters) {
         return new DataBase<Terminal>().get(id, Terminal.class, getters);
     }
 
     @Override
     public boolean delete(Terminal object) {
         new DataBase<Terminal>().delete(object);
-        return get(object.getId()) == null;
+        return get(object.getId()).isEmpty();
     }
 
     @Override
-    public List<Terminal> getAll(String... fields) {
+    public Optional<List<Terminal>> getAll(String... fields) {
         return new DataBase<Terminal>().getAll(Terminal.class, fields);
     }
 }

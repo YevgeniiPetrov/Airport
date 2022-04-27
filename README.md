@@ -6,13 +6,11 @@
     - **[dao](src/main/java/com/itvdn/airport/petrov/dao)** - *пакет со всеми DAO (Data Access Object)*
       - **[impl](src/main/java/com/itvdn/airport/petrov/dao/impl)** - *пакет со всеми реализациями DAO (Data Access Object) из пакета [dao](src/main/java/com/itvdn/airport/petrov/dao)*
     - **[entity](src/main/java/com/itvdn/airport/petrov/entity)** - *пакет со всеми entities*
+    - **[repository](src/main/java/com/itvdn/airport/petrov/repository)** - *пакет со всеми репозиториями*
+      - **[impl](src/main/java/com/itvdn/airport/petrov/repository/impl)** - *пакет со всеми реализациями репозиториев из пакета [repository](src/main/java/com/itvdn/airport/petrov/repository)*
   - **[resources](src/main/resources)**:
     - **[airport.png](src/main/resources/airport.png)** - блоксхема [БД](src/main/resources/init.sql)
     - **[init.sql](src/main/resources/init.sql)** - init-файл БД
-- **[test](src/test)**:
-  - **[java](src/test/java)**:
-    - **[dao](src/test/java/com/itvdn/airport/petrov/dao)** - *тестирование всех DAO (Data Access Object) из пакета [main.java.dao](src/main/java/com/itvdn/airport/petrov/dao)*
-    - **[entity](src/test/java/com/itvdn/airport/petrov/entity)** - *тестирование всех entities  из пакета [main.java.entity](src/main/java/com/itvdn/airport/petrov/entity)*
 
 ### [Init SQL](src/main/resources/init.sql)
 ### Блоксхема [БД](src/main/resources/init.sql):
@@ -35,12 +33,6 @@
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>8.0.28</version>
-    </dependency>
-    <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-engine</artifactId>
-        <version>5.4.0</version>
-        <scope>test</scope>
     </dependency>
 </dependencies>
 ```

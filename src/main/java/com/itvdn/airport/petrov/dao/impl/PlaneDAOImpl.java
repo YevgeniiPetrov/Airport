@@ -5,21 +5,22 @@ import com.itvdn.airport.petrov.dao.PlaneDAO;
 import com.itvdn.airport.petrov.entity.Plane;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PlaneDAOImpl implements PlaneDAO {
     @Override
-    public Plane get(int id, String... getters) {
+    public Optional<Plane> get(int id, String... getters) {
         return new DataBase<Plane>().get(id, Plane.class, getters);
     }
 
     @Override
     public boolean delete(Plane object) {
         new DataBase<Plane>().delete(object);
-        return get(object.getId()) == null;
+        return get(object.getId()).isEmpty();
     }
 
     @Override
-    public List<Plane> getAll(String... fields) {
+    public Optional<List<Plane>> getAll(String... fields) {
         return new DataBase<Plane>().getAll(Plane.class, fields);
     }
 }

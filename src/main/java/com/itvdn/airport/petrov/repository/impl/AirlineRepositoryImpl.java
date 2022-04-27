@@ -5,35 +5,36 @@ import com.itvdn.airport.petrov.entity.Airline;
 import com.itvdn.airport.petrov.repository.AirlineRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class AirlineRepositoryImpl implements AirlineRepository {
     @Override
-    public Airline getWithFlights(int id) {
+    public Optional<Airline> getWithFlights(int id) {
         return new DAOFactoryImpl().getAirlineDAO().get(id, "flights");
     }
 
     @Override
-    public Airline getWithPlanes(int id) {
+    public Optional<Airline> getWithPlanes(int id) {
         return new DAOFactoryImpl().getAirlineDAO().get(id, "planes");
     }
 
     @Override
-    public Airline getWithFlightsAndPlanes(int id) {
+    public Optional<Airline> getWithFlightsAndPlanes(int id) {
         return new DAOFactoryImpl().getAirlineDAO().get(id, "flights", "planes");
     }
 
     @Override
-    public List<Airline> getAllWithFlights() {
+    public Optional<List<Airline>> getAllWithFlights() {
         return new DAOFactoryImpl().getAirlineDAO().getAll("flights");
     }
 
     @Override
-    public List<Airline> getAllWithPlanes() {
+    public Optional<List<Airline>> getAllWithPlanes() {
         return new DAOFactoryImpl().getAirlineDAO().getAll("planes");
     }
 
     @Override
-    public List<Airline> getAllWithFlightsAndPlanes() {
+    public Optional<List<Airline>> getAllWithFlightsAndPlanes() {
         return new DAOFactoryImpl().getAirlineDAO().getAll("flights", "planes");
     }
 }

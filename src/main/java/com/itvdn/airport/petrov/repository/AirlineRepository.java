@@ -3,12 +3,13 @@ package com.itvdn.airport.petrov.repository;
 import com.itvdn.airport.petrov.entity.Airline;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AirlineRepository {
-    Airline getWithFlights(int id);
-    Airline getWithPlanes(int id);
-    Airline getWithFlightsAndPlanes(int id);
-    List<Airline> getAllWithFlights();
-    List<Airline> getAllWithPlanes();
-    List<Airline> getAllWithFlightsAndPlanes();
+    Optional<Airline> getWithFlights(int id);
+    Optional<Airline> getWithPlanes(int id);
+    Optional<Airline> getWithFlightsAndPlanes(int id);
+    Optional<List<Airline>> getAllWithFlights();
+    Optional<List<Airline>> getAllWithPlanes();
+    Optional<List<Airline>> getAllWithFlightsAndPlanes();
 }

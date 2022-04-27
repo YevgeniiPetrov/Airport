@@ -5,21 +5,22 @@ import com.itvdn.airport.petrov.dao.RouteDAO;
 import com.itvdn.airport.petrov.entity.Route;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RouteDAOImpl implements RouteDAO {
     @Override
-    public Route get(int id, String... getters) {
+    public Optional<Route> get(int id, String... getters) {
         return new DataBase<Route>().get(id, Route.class, getters);
     }
 
     @Override
     public boolean delete(Route object) {
         new DataBase<Route>().delete(object);
-        return get(object.getId()) == null;
+        return get(object.getId()).isEmpty();
     }
 
     @Override
-    public List<Route> getAll(String... fields) {
+    public Optional<List<Route>> getAll(String... fields) {
         return new DataBase<Route>().getAll(Route.class, fields);
     }
 }

@@ -5,35 +5,36 @@ import com.itvdn.airport.petrov.entity.Employee;
 import com.itvdn.airport.petrov.repository.EmployeeRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
-    public Employee getWithTerminals(int id) {
+    public Optional<Employee> getWithTerminals(int id) {
         return new DAOFactoryImpl().getEmployeeDAO().get(id, "terminals");
     }
 
     @Override
-    public Employee getWithPlanes(int id) {
+    public Optional<Employee> getWithPlanes(int id) {
         return new DAOFactoryImpl().getEmployeeDAO().get(id, "planes");
     }
 
     @Override
-    public Employee getWithTerminalsAndPlanes(int id) {
+    public Optional<Employee> getWithTerminalsAndPlanes(int id) {
         return new DAOFactoryImpl().getEmployeeDAO().get(id, "terminals", "planes");
     }
 
     @Override
-    public List<Employee> getAllWithTerminals() {
+    public Optional<List<Employee>> getAllWithTerminals() {
         return new DAOFactoryImpl().getEmployeeDAO().getAll("terminals");
     }
 
     @Override
-    public List<Employee> getAllWithPlanes() {
+    public Optional<List<Employee>> getAllWithPlanes() {
         return new DAOFactoryImpl().getEmployeeDAO().getAll("planes");
     }
 
     @Override
-    public List<Employee> getWithTerminalsAndPlanes() {
+    public Optional<List<Employee>> getWithTerminalsAndPlanes() {
         return new DAOFactoryImpl().getEmployeeDAO().getAll("terminals", "planes");
     }
 }

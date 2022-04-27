@@ -5,65 +5,66 @@ import com.itvdn.airport.petrov.entity.Flight;
 import com.itvdn.airport.petrov.repository.FlightRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class FlightRepositoryImpl implements FlightRepository {
     @Override
-    public Flight getWithTickets(int id) {
+    public Optional<Flight> getWithTickets(int id) {
         return new DAOFactoryImpl().getFlightDAO().get(id, "tickets");
     }
 
     @Override
-    public Flight getWithAirlines(int id) {
+    public Optional<Flight> getWithAirlines(int id) {
         return new DAOFactoryImpl().getFlightDAO().get(id, "airlines");
     }
 
     @Override
-    public Flight getWithPassengers(int id) {
+    public Optional<Flight> getWithPassengers(int id) {
         return new DAOFactoryImpl().getFlightDAO().get(id, "passengers");
     }
 
     @Override
-    public Flight getWithTerminals(int id) {
+    public Optional<Flight> getWithTerminals(int id) {
         return new DAOFactoryImpl().getFlightDAO().get(id, "terminals");
     }
 
     @Override
-    public Flight getWithTicketsAndPassengers(int id) {
+    public Optional<Flight> getWithTicketsAndPassengers(int id) {
         return new DAOFactoryImpl().getFlightDAO().get(id, "tickets", "passengers");
     }
 
     @Override
-    public Flight getWithAirlinesAndTerminals(int id) {
+    public Optional<Flight> getWithAirlinesAndTerminals(int id) {
         return new DAOFactoryImpl().getFlightDAO().get(id, "airlines", "terminals");
     }
 
     @Override
-    public List<Flight> getAllWithTickets() {
+    public Optional<List<Flight>> getAllWithTickets() {
         return new DAOFactoryImpl().getFlightDAO().getAll("tickets");
     }
 
     @Override
-    public List<Flight> getAllWithAirlines() {
+    public Optional<List<Flight>> getAllWithAirlines() {
         return new DAOFactoryImpl().getFlightDAO().getAll("airlines");
     }
 
     @Override
-    public List<Flight> getAllWithPassengers() {
+    public Optional<List<Flight>> getAllWithPassengers() {
         return new DAOFactoryImpl().getFlightDAO().getAll("passengers");
     }
 
     @Override
-    public List<Flight> getAllWithTerminals() {
+    public Optional<List<Flight>> getAllWithTerminals() {
         return new DAOFactoryImpl().getFlightDAO().getAll("terminals");
     }
 
     @Override
-    public List<Flight> getAllWithTicketsAndPassengers() {
+    public Optional<List<Flight>> getAllWithTicketsAndPassengers() {
         return new DAOFactoryImpl().getFlightDAO().getAll("tickets", "passengers");
     }
 
     @Override
-    public List<Flight> getAllWithAirlinesAndTerminals() {
+    public Optional<List<Flight>> getAllWithAirlinesAndTerminals() {
         return new DAOFactoryImpl().getFlightDAO().getAll("airlines", "terminals");
     }
 }

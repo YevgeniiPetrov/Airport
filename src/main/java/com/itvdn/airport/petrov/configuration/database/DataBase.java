@@ -7,6 +7,7 @@ import org.hibernate.cfg.Configuration;
 
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Optional;
 
 public class DataBase<T> {
     private static SessionFactory sessionFactory;
@@ -32,7 +33,7 @@ public class DataBase<T> {
         return object;
     }
 
-    public T get(int id, Class<T> type, String... fields) {
+    public Optional<T> get(int id, Class<T> type, String... fields) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         T object = null;
@@ -62,7 +63,7 @@ public class DataBase<T> {
         }
         transaction.commit();
         session.close();
-        return object;
+        return Optional.ofNullable(object);
     }
 
     public T update(T object) {
@@ -82,7 +83,7 @@ public class DataBase<T> {
         session.close();
     }
 
-    public List<T> getAll(Class<T> type, String... fields) {
+    public Optional<List<T>> getAll(Class<T> type, String... fields) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         StringBuilder queryStr = new StringBuilder()
@@ -105,6 +106,6 @@ public class DataBase<T> {
         }
         transaction.commit();
         session.close();
-        return objects;
+        return Optional.ofNullable(objects);
     }
 }

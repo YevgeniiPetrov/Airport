@@ -5,15 +5,16 @@ import com.itvdn.airport.petrov.entity.Route;
 import com.itvdn.airport.petrov.repository.RouteRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RouteRepositoryImpl implements RouteRepository {
     @Override
-    public Route getWIthFlights(int id) {
+    public Optional<Route> getWIthFlights(int id) {
         return new DAOFactoryImpl().getRouteDAO().get(id, "flights");
     }
 
     @Override
-    public List<Route> getAllWithFlights() {
+    public Optional<List<Route>> getAllWithFlights() {
         return new DAOFactoryImpl().getRouteDAO().getAll("flights");
     }
 }
