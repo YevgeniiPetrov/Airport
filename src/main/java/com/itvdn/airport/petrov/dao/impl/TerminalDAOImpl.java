@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class TerminalDAOImpl implements TerminalDAO {
     @Override
-    public Optional<Terminal> get(int id, String... getters) {
-        return new DataBase<Terminal>().get(id, Terminal.class, getters);
+    public Optional<Terminal> get(int id, String... fields) {
+        return new DataBase<Terminal>().get(id, Terminal.class, fields);
     }
 
     @Override

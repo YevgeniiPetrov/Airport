@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class StateDAOImpl implements StateDAO {
     @Override
-    public Optional<State> get(int id, String... getters) {
-        return new DataBase<State>().get(id, State.class, getters);
+    public Optional<State> get(int id, String... fields) {
+        return new DataBase<State>().get(id, State.class, fields);
     }
 
     @Override

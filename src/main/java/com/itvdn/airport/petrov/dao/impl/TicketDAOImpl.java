@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class TicketDAOImpl implements TicketDAO {
     @Override
-    public Optional<Ticket> get(int id, String... getters) {
-        return new DataBase<Ticket>().get(id, Ticket.class, getters);
+    public Optional<Ticket> get(int id, String... fields) {
+        return new DataBase<Ticket>().get(id, Ticket.class, fields);
     }
 
     @Override

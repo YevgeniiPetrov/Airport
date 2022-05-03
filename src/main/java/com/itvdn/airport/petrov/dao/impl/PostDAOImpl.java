@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class PostDAOImpl implements PostDAO {
     @Override
-    public Optional<Post> get(int id, String... getters) {
-        return new DataBase<Post>().get(id, Post.class, getters);
+    public Optional<Post> get(int id, String... fields) {
+        return new DataBase<Post>().get(id, Post.class, fields);
     }
 
     @Override

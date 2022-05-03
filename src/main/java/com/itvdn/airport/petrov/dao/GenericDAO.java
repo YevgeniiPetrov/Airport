@@ -10,7 +10,7 @@ public interface GenericDAO<T> {
         return new DataBase<T>().add(object);
     }
 
-    Optional<T> get(int id, String... getters);
+    Optional<T> get(int id, String... fields);
 
     default T update(T object) {
         return new DataBase<T>().update(object);

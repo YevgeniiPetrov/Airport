@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class AirlineDAOImpl implements AirlineDAO {
     @Override
-    public Optional<Airline> get(int id, String... getters) {
-        return new DataBase<Airline>().get(id, Airline.class, getters);
+    public Optional<Airline> get(int id, String... fields) {
+        return new DataBase<Airline>().get(id, Airline.class, fields);
     }
 
     @Override

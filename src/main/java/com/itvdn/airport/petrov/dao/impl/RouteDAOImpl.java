@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class RouteDAOImpl implements RouteDAO {
     @Override
-    public Optional<Route> get(int id, String... getters) {
-        return new DataBase<Route>().get(id, Route.class, getters);
+    public Optional<Route> get(int id, String... fields) {
+        return new DataBase<Route>().get(id, Route.class, fields);
     }
 
     @Override

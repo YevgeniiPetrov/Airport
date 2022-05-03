@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class PlaneDAOImpl implements PlaneDAO {
     @Override
-    public Optional<Plane> get(int id, String... getters) {
-        return new DataBase<Plane>().get(id, Plane.class, getters);
+    public Optional<Plane> get(int id, String... fields) {
+        return new DataBase<Plane>().get(id, Plane.class, fields);
     }
 
     @Override

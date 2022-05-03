@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
-    public Optional<Employee> get(int id, String... getters) {
-        return new DataBase<Employee>().get(id, Employee.class, getters);
+    public Optional<Employee> get(int id, String... fields) {
+        return new DataBase<Employee>().get(id, Employee.class, fields);
     }
 
     @Override

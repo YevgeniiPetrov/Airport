@@ -16,8 +16,8 @@ import java.util.Optional;
 
 public class PassengerDAOImpl implements PassengerDAO {
     @Override
-    public Optional<Passenger> get(int id, String... getters) {
-        return new DataBase<Passenger>().get(id, Passenger.class, getters);
+    public Optional<Passenger> get(int id, String... fields) {
+        return new DataBase<Passenger>().get(id, Passenger.class, fields);
     }
 
     @Override
