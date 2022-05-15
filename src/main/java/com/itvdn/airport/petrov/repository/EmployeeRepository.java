@@ -1,5 +1,6 @@
 package com.itvdn.airport.petrov.repository;
 
-public interface EmployeeRepository {
+import com.itvdn.airport.petrov.entity.Employee;
 
+public interface EmployeeRepository extends GenericRepository<Employee> {
 }

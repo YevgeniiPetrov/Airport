@@ -30,12 +30,8 @@ public class Passenger extends Essence {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "flight_passenger",
-            joinColumns = {
-                    @JoinColumn(name = "passenger_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "flight_id")
-            }
+            joinColumns = @JoinColumn(name = "passenger_id"),
+            inverseJoinColumns = @JoinColumn(name = "flight_id")
     )
     private List<Flight> flights;
 }

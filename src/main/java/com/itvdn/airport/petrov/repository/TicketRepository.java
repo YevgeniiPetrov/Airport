@@ -1,4 +1,6 @@
 package com.itvdn.airport.petrov.repository;
 
-public interface TicketRepository {
+import com.itvdn.airport.petrov.entity.Ticket;
+
+public interface TicketRepository extends GenericRepository<Ticket> {
 }

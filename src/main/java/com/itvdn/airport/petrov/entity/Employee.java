@@ -29,23 +29,15 @@ public class Employee extends Essence {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "terminal_employee",
-            joinColumns = {
-                    @JoinColumn(name = "employee_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "terminal_id")
-            }
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "terminal_id")
     )
     private List<Terminal> terminals;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "plane_employee",
-            joinColumns = {
-                    @JoinColumn(name = "employee_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "plane_id")
-            }
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "plane_id")
     )
     private List<Plane> planes;
 }

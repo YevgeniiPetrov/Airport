@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DataBase<T> {
+public class DataBase<T extends Essence> {
     private static SessionFactory sessionFactory;
 
     public DataBase() {
@@ -26,7 +26,7 @@ public class DataBase<T> {
         return sessionFactory;
     }
 
-    public <T extends Essence> T add(T object) {
+    public T add(T object) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(object);
@@ -35,7 +35,7 @@ public class DataBase<T> {
         return object;
     }
 
-    public <T extends Essence> Optional<T> get(int id, Class<T> type) {
+    public Optional<T> get(int id, Class<T> type) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         T object = null;
@@ -54,7 +54,7 @@ public class DataBase<T> {
         return Optional.ofNullable(object);
     }
 
-    public <T extends Essence> T update(T object) {
+    public T update(T object) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.update(object);
@@ -63,13 +63,13 @@ public class DataBase<T> {
         return object;
     }
 
-    public <T extends Essence> Boolean delete(T object) {
+    public Boolean delete(T object) {
         object.setRemoved(true);
         update(object);
         return object.getRemoved();
     }
 
-    public <T extends Essence> List<T> getAll(Class<T> type) {
+    public List<T> getAll(Class<T> type) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         List<T> objects;

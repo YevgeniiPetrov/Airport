@@ -5,15 +5,13 @@ import com.itvdn.airport.petrov.dao.AirlineDAO;
 import com.itvdn.airport.petrov.dao.DAOFactory;
 import com.itvdn.airport.petrov.dao.impl.DAOFactoryImpl;
 import com.itvdn.airport.petrov.entity.Airline;
+import com.itvdn.airport.petrov.repository.PassengerRepository;
+import com.itvdn.airport.petrov.repository.PlaneRepository;
+import com.itvdn.airport.petrov.repository.impl.RepositoryFactoryImpl;
 
 public class Main {
     public static void main(String[] args) {
-        DAOFactory daoFactory = new DAOFactoryImpl();
-        AirlineDAO airlineDAO = daoFactory.getAirlineDAO();
-        Airline airline = (Airline) airlineDAO.get(3).get();
-        System.out.println(airline.getRemoved());
-        airlineDAO.delete(airline);
-        System.out.println(airline.getRemoved());
-        System.out.println(airlineDAO.getAll().size());
+        PassengerRepository passengerRepository = new RepositoryFactoryImpl().getPassengerRepository();
+        System.out.println(passengerRepository.getAllArrived().size());
     }
 }

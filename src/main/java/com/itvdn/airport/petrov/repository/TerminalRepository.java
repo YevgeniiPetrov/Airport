@@ -1,5 +1,6 @@
 package com.itvdn.airport.petrov.repository;
 
-public interface TerminalRepository {
+import com.itvdn.airport.petrov.entity.Terminal;
 
+public interface TerminalRepository extends GenericRepository<Terminal> {
 }

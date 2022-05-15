@@ -1,5 +1,6 @@
 package com.itvdn.airport.petrov.repository;
 
-public interface RouteRepository {
+import com.itvdn.airport.petrov.entity.Route;
 
+public interface RouteRepository extends GenericRepository<Route> {
 }

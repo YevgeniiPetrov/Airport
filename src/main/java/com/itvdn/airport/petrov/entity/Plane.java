@@ -23,12 +23,8 @@ public class Plane extends Essence {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "plane_employee",
-            joinColumns = {
-                    @JoinColumn(name = "plane_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "employee_id")
-            }
+            joinColumns = @JoinColumn(name = "plane_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
     )
     private List<Employee> employees;
 }

@@ -22,12 +22,8 @@ public class Airline extends Essence {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "flight_airline",
-            joinColumns = {
-                    @JoinColumn(name = "airline_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "flight_id")
-            }
+            joinColumns = @JoinColumn(name = "airline_id"),
+            inverseJoinColumns = @JoinColumn(name = "flight_id")
     )
     private List<Flight> flights;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "airline")

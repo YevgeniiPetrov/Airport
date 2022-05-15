@@ -1,5 +1,6 @@
 package com.itvdn.airport.petrov.repository;
 
-public interface PostRepository {
+import com.itvdn.airport.petrov.entity.Post;
 
+public interface PostRepository extends GenericRepository<Post> {
 }

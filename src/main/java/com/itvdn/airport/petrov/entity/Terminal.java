@@ -21,23 +21,15 @@ public class Terminal extends Essence {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "terminal_employee",
-            joinColumns = {
-                    @JoinColumn(name = "terminal_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "employee_id")
-            }
+            joinColumns = @JoinColumn(name = "terminal_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
     )
     private List<Employee> employees;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "flight_terminal",
-            joinColumns = {
-                    @JoinColumn(name = "terminal_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "flight_id")
-            }
+            joinColumns = @JoinColumn(name = "terminal_id"),
+            inverseJoinColumns = @JoinColumn(name = "flight_id")
     )
     private List<Flight> flights;
 }

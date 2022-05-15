@@ -1,5 +1,6 @@
 package com.itvdn.airport.petrov.repository;
 
-public interface StateRepository {
+import com.itvdn.airport.petrov.entity.State;
 
+public interface StateRepository extends GenericRepository<State> {
 }
