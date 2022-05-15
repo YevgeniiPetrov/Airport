@@ -9,18 +9,12 @@ import java.util.Optional;
 
 public class PostDAOImpl implements PostDAO {
     @Override
-    public Optional<Post> get(int id, String... fields) {
-        return new DataBase<Post>().get(id, Post.class, fields);
+    public Optional<Post> get(int id) {
+        return new DataBase<Post>().get(id, Post.class);
     }
 
     @Override
-    public boolean delete(Post object) {
-        new DataBase<Post>().delete(object);
-        return get(object.getId()).isEmpty();
-    }
-
-    @Override
-    public Optional<List<Post>> getAll(String... fields) {
-        return new DataBase<Post>().getAll(Post.class, fields);
+    public List<Post> getAll() {
+        return new DataBase<Post>().getAll(Post.class);
     }
 }

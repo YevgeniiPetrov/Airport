@@ -16,23 +16,17 @@ import java.util.Optional;
 
 public class PassengerDAOImpl implements PassengerDAO {
     @Override
-    public Optional<Passenger> get(int id, String... fields) {
-        return new DataBase<Passenger>().get(id, Passenger.class, fields);
+    public Optional<Passenger> get(int id) {
+        return new DataBase<Passenger>().get(id, Passenger.class);
     }
 
     @Override
-    public boolean delete(Passenger object) {
-        new DataBase<Passenger>().delete(object);
-        return get(object.getId()).isEmpty();
+    public List<Passenger> getAll() {
+        return new DataBase<Passenger>().getAll(Passenger.class);
     }
 
     @Override
-    public Optional<List<Passenger>> getAll(String... fields) {
-        return new DataBase<Passenger>().getAll(Passenger.class, fields);
-    }
-
-    @Override
-    public Optional<List<Passenger>> getAllArrivedByCriteria() {
+    public List<Passenger> getAllArrivedByCriteria() {
         Session session = new DataBase<Employee>().getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -49,26 +43,23 @@ public class PassengerDAOImpl implements PassengerDAO {
         List<Passenger> list = query.getResultList();
         transaction.commit();
         session.close();
-        return Optional.ofNullable(list);
+        return list;
     }
 
 
     @Override
-    public Optional<List<Passenger>> getAllArrivedByHQL() {
+    public List<Passenger> getAllArrivedByHQL() {
         Session session = new DataBase<Employee>().getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        String query = "" +
-                "select " +
-                "   p " +
-                "from " +
-                "   Passenger p " +
-                "   join p.flights f " +
-                "   join f.state s " +
-                "where " +
-                "   s.title = 'arrived'";
-        List<Passenger> list = session.createQuery(query).getResultList();
+        StringBuilder queryStr = new StringBuilder()
+                .append("select p ")
+                .append("from Passenger p ")
+                .append("join p.flights f ")
+                .append("join f.state s ")
+                .append("where s.title = 'arrived'");
+        List<Passenger> list = session.createQuery(queryStr.toString()).getResultList();
         transaction.commit();
         session.close();
-        return Optional.ofNullable(list);
+        return list;
     }
 }

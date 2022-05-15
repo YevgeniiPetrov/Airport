@@ -1,11 +1,13 @@
 package com.itvdn.airport.petrov.configuration.database;
 
+import com.itvdn.airport.petrov.entity.Essence;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +26,7 @@ public class DataBase<T> {
         return sessionFactory;
     }
 
-    public T add(T object) {
+    public <T extends Essence> T add(T object) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(object);
@@ -33,40 +35,26 @@ public class DataBase<T> {
         return object;
     }
 
-    public Optional<T> get(int id, Class<T> type, String... fields) {
+    public <T extends Essence> Optional<T> get(int id, Class<T> type) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         T object = null;
-        Query query;
-        StringBuilder queryStr = new StringBuilder()
-                .append("select obj from ")
-                .append(type.getSimpleName())
-                .append(" obj ");
-        if (fields.length == 0) {
-            queryStr.append("where obj.id = :id");
-            query = session.createQuery(queryStr.toString());
+        try {
+            StringBuilder queryStr = new StringBuilder()
+                    .append("select obj from ")
+                    .append(type.getSimpleName())
+                    .append(" obj ")
+                    .append("where obj.id = :id");
+            Query query = session.createQuery(queryStr.toString());
             query.setParameter("id", id);
             object = (T) query.getSingleResult();
-        } else {
-            for (String field : fields) {
-                StringBuilder temQuery = new StringBuilder(queryStr);
-                temQuery.append("left join fetch obj.")
-                        .append(field)
-                        .append(" ")
-                        .append(field)
-                        .append(" ")
-                        .append("where obj.id = :id");
-                query = session.createQuery(temQuery.toString());
-                query.setParameter("id", id);
-                object = (T) query.getSingleResult();
-            }
-        }
-        transaction.commit();
+            transaction.commit();
+        } catch (Exception e) {}
         session.close();
         return Optional.ofNullable(object);
     }
 
-    public T update(T object) {
+    public <T extends Essence> T update(T object) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.update(object);
@@ -75,37 +63,28 @@ public class DataBase<T> {
         return object;
     }
 
-    public void delete(T object) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.delete(object);
-        transaction.commit();
-        session.close();
+    public <T extends Essence> Boolean delete(T object) {
+        object.setRemoved(true);
+        update(object);
+        return object.getRemoved();
     }
 
-    public Optional<List<T>> getAll(Class<T> type, String... fields) {
+    public <T extends Essence> List<T> getAll(Class<T> type) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        StringBuilder queryStr = new StringBuilder()
-                .append("select obj from ")
-                .append(type.getSimpleName())
-                .append(" obj ");
-        Query query = session.createQuery(queryStr.toString());
-        List objects = query.getResultList();
-        for (String field : fields) {
-            StringBuilder temQuery = new StringBuilder(queryStr);
-            temQuery.append("left join fetch obj.")
-                    .append(field)
-                    .append(" ")
-                    .append(field)
-                    .append(" ")
-                    .append("where obj in :objects");
-            query = session.createQuery(temQuery.toString());
-            query.setParameter("objects", objects);
+        List<T> objects;
+        try {
+            StringBuilder queryStr = new StringBuilder()
+                    .append("select obj from ")
+                    .append(type.getSimpleName())
+                    .append(" obj ");
+            Query query = session.createQuery(queryStr.toString());
             objects = query.getResultList();
+            transaction.commit();
+        } catch (Exception e) {
+            objects = new ArrayList<>();
         }
-        transaction.commit();
         session.close();
-        return Optional.ofNullable(objects);
+        return objects;
     }
 }

@@ -9,18 +9,12 @@ import java.util.Optional;
 
 public class PlaneDAOImpl implements PlaneDAO {
     @Override
-    public Optional<Plane> get(int id, String... fields) {
-        return new DataBase<Plane>().get(id, Plane.class, fields);
+    public Optional<Plane> get(int id) {
+        return new DataBase<Plane>().get(id, Plane.class);
     }
 
     @Override
-    public boolean delete(Plane object) {
-        new DataBase<Plane>().delete(object);
-        return get(object.getId()).isEmpty();
-    }
-
-    @Override
-    public Optional<List<Plane>> getAll(String... fields) {
-        return new DataBase<Plane>().getAll(Plane.class, fields);
+    public List<Plane> getAll() {
+        return new DataBase<Plane>().getAll(Plane.class);
     }
 }

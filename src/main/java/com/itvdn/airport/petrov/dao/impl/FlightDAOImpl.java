@@ -9,18 +9,12 @@ import java.util.Optional;
 
 public class FlightDAOImpl implements FlightDAO {
     @Override
-    public Optional<Flight> get(int id, String... fields) {
-        return new DataBase<Flight>().get(id, Flight.class, fields);
+    public Optional<Flight> get(int id) {
+        return new DataBase<Flight>().get(id, Flight.class);
     }
 
     @Override
-    public boolean delete(Flight object) {
-        new DataBase<Flight>().delete(object);
-        return get(object.getId()).isEmpty();
-    }
-
-    @Override
-    public Optional<List<Flight>> getAll(String... fields) {
-        return new DataBase<Flight>().getAll(Flight.class, fields);
+    public List<Flight> getAll() {
+        return new DataBase<Flight>().getAll(Flight.class);
     }
 }

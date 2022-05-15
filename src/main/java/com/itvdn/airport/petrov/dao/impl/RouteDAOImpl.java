@@ -9,18 +9,12 @@ import java.util.Optional;
 
 public class RouteDAOImpl implements RouteDAO {
     @Override
-    public Optional<Route> get(int id, String... fields) {
-        return new DataBase<Route>().get(id, Route.class, fields);
+    public Optional<Route> get(int id) {
+        return new DataBase<Route>().get(id, Route.class);
     }
 
     @Override
-    public boolean delete(Route object) {
-        new DataBase<Route>().delete(object);
-        return get(object.getId()).isEmpty();
-    }
-
-    @Override
-    public Optional<List<Route>> getAll(String... fields) {
-        return new DataBase<Route>().getAll(Route.class, fields);
+    public List<Route> getAll() {
+        return new DataBase<Route>().getAll(Route.class);
     }
 }

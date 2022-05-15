@@ -9,18 +9,12 @@ import java.util.Optional;
 
 public class StateDAOImpl implements StateDAO {
     @Override
-    public Optional<State> get(int id, String... fields) {
-        return new DataBase<State>().get(id, State.class, fields);
+    public Optional<State> get(int id) {
+        return new DataBase<State>().get(id, State.class);
     }
 
     @Override
-    public boolean delete(State object) {
-        new DataBase<State>().delete(object);
-        return get(object.getId()).isEmpty();
-    }
-
-    @Override
-    public Optional<List<State>> getAll(String... fields) {
-        return new DataBase<State>().getAll(State.class, fields);
+    public List<State> getAll() {
+        return new DataBase<State>().getAll(State.class);
     }
 }

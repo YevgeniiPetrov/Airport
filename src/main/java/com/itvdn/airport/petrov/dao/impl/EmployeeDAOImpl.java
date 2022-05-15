@@ -9,18 +9,12 @@ import java.util.Optional;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
-    public Optional<Employee> get(int id, String... fields) {
-        return new DataBase<Employee>().get(id, Employee.class, fields);
+    public Optional<Employee> get(int id) {
+        return new DataBase<Employee>().get(id, Employee.class);
     }
 
     @Override
-    public boolean delete(Employee object) {
-        new DataBase<Employee>().delete(object);
-        return get(object.getId()).isEmpty();
-    }
-
-    @Override
-    public Optional<List<Employee>> getAll(String... fields) {
-        return new DataBase<Employee>().getAll(Employee.class, fields);
+    public List<Employee> getAll() {
+        return new DataBase<Employee>().getAll(Employee.class);
     }
 }

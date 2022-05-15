@@ -9,18 +9,12 @@ import java.util.Optional;
 
 public class TicketDAOImpl implements TicketDAO {
     @Override
-    public Optional<Ticket> get(int id, String... fields) {
-        return new DataBase<Ticket>().get(id, Ticket.class, fields);
+    public Optional<Ticket> get(int id) {
+        return new DataBase<Ticket>().get(id, Ticket.class);
     }
 
     @Override
-    public boolean delete(Ticket object) {
-        new DataBase<Ticket>().delete(object);
-        return get(object.getId()).isEmpty();
-    }
-
-    @Override
-    public Optional<List<Ticket>> getAll(String... fields) {
-        return new DataBase<Ticket>().getAll(Ticket.class, fields);
+    public List<Ticket> getAll() {
+        return new DataBase<Ticket>().getAll(Ticket.class);
     }
 }
