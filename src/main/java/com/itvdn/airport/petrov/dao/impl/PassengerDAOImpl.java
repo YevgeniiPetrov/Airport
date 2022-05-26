@@ -2,7 +2,6 @@ package com.itvdn.airport.petrov.dao.impl;
 
 import com.itvdn.airport.petrov.configuration.database.DataBase;
 import com.itvdn.airport.petrov.dao.PassengerDAO;
-import com.itvdn.airport.petrov.entity.Employee;
 import com.itvdn.airport.petrov.entity.Flight;
 import com.itvdn.airport.petrov.entity.Passenger;
 import com.itvdn.airport.petrov.entity.State;
@@ -27,7 +26,7 @@ public class PassengerDAOImpl implements PassengerDAO {
 
     @Override
     public List<Passenger> getAllArrivedByCriteria() {
-        Session session = new DataBase<Employee>().getSessionFactory().openSession();
+        Session session = new DataBase<Passenger>().getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<Passenger> criteriaQuery = criteriaBuilder.createQuery(Passenger.class);
@@ -49,7 +48,7 @@ public class PassengerDAOImpl implements PassengerDAO {
 
     @Override
     public List<Passenger> getAllArrivedByHQL() {
-        Session session = new DataBase<Employee>().getSessionFactory().openSession();
+        Session session = new DataBase<Passenger>().getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         StringBuilder queryStr = new StringBuilder()
                 .append("select p ")

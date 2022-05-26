@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@org.springframework.context.annotation.Configuration
 public class DataBase<T extends Essence> {
     private static SessionFactory sessionFactory;
 

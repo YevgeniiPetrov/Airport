@@ -1,21 +1,26 @@
 package com.itvdn.airport.petrov.repository.impl;
 
+import com.itvdn.airport.petrov.dao.DAOFactory;
 import com.itvdn.airport.petrov.dao.impl.DAOFactoryImpl;
 import com.itvdn.airport.petrov.entity.Passenger;
 import com.itvdn.airport.petrov.repository.PassengerRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class PassengerRepositoryImpl implements PassengerRepository {
+    private DAOFactory daoFactory;
+
     @Override
     public Passenger add(Passenger object) {
-        return new DAOFactoryImpl().getPassengerDAO().add(object);
+        return daoFactory.getPassengerDAO().add(object);
     }
 
     @Override
     public Optional<Passenger> get(int id) {
-        return new DAOFactoryImpl().getPassengerDAO().get(id);
+        return daoFactory.getPassengerDAO().get(id);
     }
 
     @Override
