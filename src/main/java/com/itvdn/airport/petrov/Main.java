@@ -1,10 +1,14 @@
 package com.itvdn.airport.petrov;
 
-import com.itvdn.airport.petrov.configuration.Config;
+import com.itvdn.airport.petrov.configuration.database.DataBase;
+import com.itvdn.airport.petrov.entity.Passenger;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Arrays;
 
@@ -12,7 +16,5 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
-        System.out.println(Arrays.toString(ctx.getBeanDefinitionNames()));
     }
 }

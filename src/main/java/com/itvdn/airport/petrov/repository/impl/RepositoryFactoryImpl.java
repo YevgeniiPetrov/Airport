@@ -1,55 +1,68 @@
 package com.itvdn.airport.petrov.repository.impl;
 
 import com.itvdn.airport.petrov.repository.*;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class RepositoryFactoryImpl implements RepositoryFactory {
+    private AirlineRepository airlineRepository;
+    private EmployeeRepository employeeRepository;
+    private FlightRepository flightRepository;
+    private PassengerRepository passengerRepository;
+    private PlaneRepository planeRepository;
+    private PostRepository postRepository;
+    private RouteRepository routeRepository;
+    private StateRepository stateRepository;
+    private TerminalRepository terminalRepository;
+    private TicketRepository ticketRepository;
+
     @Override
     public AirlineRepository getAirlineRepository() {
-        return new AirlineRepositoryImpl();
+        return airlineRepository;
     }
 
     @Override
     public EmployeeRepository getEmployeeRepository() {
-        return new EmployeeRepositoryImpl();
+        return employeeRepository;
     }
 
     @Override
     public FlightRepository getFlightRepository() {
-        return new FlightRepositoryImpl();
+        return flightRepository;
     }
 
     @Override
     public PassengerRepository getPassengerRepository() {
-        return new PassengerRepositoryImpl();
+        return passengerRepository;
     }
 
     @Override
     public PlaneRepository getPlaneRepository() {
-        return new PlaneRepositoryImpl();
+        return planeRepository;
     }
 
     @Override
     public PostRepository getPostRepository() {
-        return new PostRepositoryImpl();
+        return postRepository;
     }
 
     @Override
     public RouteRepository getRouteRepository() {
-        return new RouteRepositoryImpl();
+        return routeRepository;
     }
 
     @Override
     public StateRepository getStateRepository() {
-        return new StateRepositoryImpl();
+        return stateRepository;
     }
 
     @Override
     public TerminalRepository getTerminalRepository() {
-        return new TerminalRepositoryImpl();
+        return terminalRepository;
     }
 
     @Override
     public TicketRepository getTicketRepository() {
-        return new TicketRepositoryImpl();
+        return ticketRepository;
     }
 }

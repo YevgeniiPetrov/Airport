@@ -5,13 +5,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@org.springframework.context.annotation.Configuration
+@Component
 public class DataBase<T extends Essence> {
     private static SessionFactory sessionFactory;
 

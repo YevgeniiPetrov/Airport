@@ -1,55 +1,70 @@
 package com.itvdn.airport.petrov.dao.impl;
 
 import com.itvdn.airport.petrov.dao.*;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
+@AllArgsConstructor
 public class DAOFactoryImpl implements DAOFactory {
+    private AirlineDAO airlineDAO;
+    private EmployeeDAO employeeDAO;
+    private FlightDAO flightDAO;
+    private PassengerDAO passengerDAO;
+    private PlaneDAO planeDAO;
+    private PostDAO postDAO;
+    private RouteDAO routeDAO;
+    private StateDAO stateDAO;
+    private TerminalDAO terminalDAO;
+    private TicketDAO ticketDAO;
+
     @Override
     public AirlineDAO getAirlineDAO() {
-        return new AirlineDAOImpl();
+        return airlineDAO;
     }
 
     @Override
     public EmployeeDAO getEmployeeDAO() {
-        return new EmployeeDAOImpl();
+        return employeeDAO;
     }
 
     @Override
     public FlightDAO getFlightDAO() {
-        return new FlightDAOImpl();
+        return flightDAO;
     }
 
     @Override
     public PassengerDAO getPassengerDAO() {
-        return new PassengerDAOImpl();
+        return passengerDAO;
     }
 
     @Override
     public PlaneDAO getPlaneDAO() {
-        return new PlaneDAOImpl();
+        return planeDAO;
     }
 
     @Override
     public PostDAO getPostDAO() {
-        return new PostDAOImpl();
+        return postDAO;
     }
 
     @Override
     public RouteDAO getRouteDAO() {
-        return new RouteDAOImpl();
+        return routeDAO;
     }
 
     @Override
     public StateDAO getStateDAO() {
-        return new StateDAOImpl();
+        return stateDAO;
     }
 
     @Override
     public TerminalDAO getTerminalDAO() {
-        return new TerminalDAOImpl();
+        return terminalDAO;
     }
 
     @Override
     public TicketDAO getTicketDAO() {
-        return new TicketDAOImpl();
+        return ticketDAO;
     }
 }
