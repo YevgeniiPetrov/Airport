@@ -1,7 +1,9 @@
 package com.itvdn.airport.petrov.service;
 
-import com.itvdn.airport.petrov.entity.Passenger;
+import com.itvdn.airport.petrov.dto.RequestPassengerDTO;
+import com.itvdn.airport.petrov.dto.ResponsePassengerDTO;
 
 public interface PassengerService {
-    Passenger add(Passenger passenger);
+    ResponsePassengerDTO get(int id);
+    ResponsePassengerDTO add(RequestPassengerDTO requestPassengerDTO);
 }

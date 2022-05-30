@@ -2,7 +2,9 @@ package com.itvdn.airport.petrov.repository.impl;
 
 import com.itvdn.airport.petrov.repository.*;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @AllArgsConstructor
 public class RepositoryFactoryImpl implements RepositoryFactory {
     private AirlineRepository airlineRepository;

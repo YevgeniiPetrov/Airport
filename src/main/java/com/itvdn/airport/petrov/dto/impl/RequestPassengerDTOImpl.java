@@ -1,18 +1,22 @@
 package com.itvdn.airport.petrov.dto.impl;
 
 import com.itvdn.airport.petrov.dto.RequestPassengerDTO;
-import com.itvdn.airport.petrov.entity.Passenger;
-import com.itvdn.airport.petrov.service.ServiceFactory;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
-@AllArgsConstructor
-public class RequestPassengerDTOImpl implements RequestPassengerDTO {
-    private ServiceFactory serviceFactory;
+import java.time.LocalDate;
 
-    @Override
-    public Passenger add(Passenger passenger) {
-        return serviceFactory.getPassengerService().add(passenger);
-    }
+@Component
+@Builder
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class RequestPassengerDTOImpl implements RequestPassengerDTO {
+    private String firstName;
+    private String lastName;
+    private LocalDate birthDate;
+    private Integer passport;
 }
