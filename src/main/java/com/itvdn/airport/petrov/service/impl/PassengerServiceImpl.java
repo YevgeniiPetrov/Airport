@@ -21,8 +21,8 @@ public class PassengerServiceImpl implements PassengerService {
     @Override
     public ResponsePassengerDTO get(int id) {
         Optional<Passenger> optionalPassenger = repositoryFactory.getPassengerRepository().get(id);
-        return optionalPassenger.isEmpty() ?
-                null : mapperFactory.getPassengerMapper().passengerToMap(optionalPassenger.get());
+        return optionalPassenger.isPresent() ?
+                mapperFactory.getPassengerMapper().passengerToMap(optionalPassenger.get()) : null;
     }
 
     @Override

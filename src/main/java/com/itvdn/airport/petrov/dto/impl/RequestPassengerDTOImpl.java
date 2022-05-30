@@ -1,6 +1,7 @@
 package com.itvdn.airport.petrov.dto.impl;
 
 import com.itvdn.airport.petrov.dto.RequestPassengerDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
