@@ -15,4 +15,5 @@ public class DTOFactoryImpl implements DTOFactory {
     private ResponseTicketDTO responseTicketDTO;
     private ResponseRouteDTO responseRouteDTO;
     private ResponseStateDTO responseStateDTO;
+    private ResponseFlightDTO responseFlightDTO;
 }

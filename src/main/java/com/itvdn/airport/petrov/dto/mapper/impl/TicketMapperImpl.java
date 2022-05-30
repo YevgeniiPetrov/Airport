@@ -1,9 +1,11 @@
 package com.itvdn.airport.petrov.dto.mapper.impl;
 
 import com.itvdn.airport.petrov.dto.RequestTicketDTO;
+import com.itvdn.airport.petrov.dto.ResponseFlightDTO;
 import com.itvdn.airport.petrov.dto.ResponsePassengerDTO;
 import com.itvdn.airport.petrov.dto.ResponseTicketDTO;
 import com.itvdn.airport.petrov.dto.impl.ResponseTicketDTOImpl;
+import com.itvdn.airport.petrov.dto.mapper.FlightMapper;
 import com.itvdn.airport.petrov.dto.mapper.MapperFactory;
 import com.itvdn.airport.petrov.dto.mapper.PassengerMapper;
 import com.itvdn.airport.petrov.dto.mapper.TicketMapper;
@@ -25,12 +27,14 @@ public class TicketMapperImpl implements TicketMapper {
     public ResponseTicketDTO ticketToMap(Ticket ticket) {
         PassengerMapper passengerMapper = mapperFactory.getPassengerMapper();
         ResponsePassengerDTO passenger = passengerMapper.passengerToMap(ticket.getPassenger());
+        FlightMapper flightMapper = mapperFactory.getFlightMapper();
+        ResponseFlightDTO flight = flightMapper.flightToMap(ticket.getFlight());
         return ResponseTicketDTOImpl.builder()
                 .id(ticket.getId())
                 .number(ticket.getNumber())
                 .place(ticket.getPlace())
                 .passenger(passenger)
-                //.flight(ticket.getFlight())
+                .flight(flight)
                 .build();
     }
 

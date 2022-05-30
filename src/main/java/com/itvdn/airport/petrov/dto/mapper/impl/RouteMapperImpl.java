@@ -4,9 +4,11 @@ import com.itvdn.airport.petrov.dto.ResponseRouteDTO;
 import com.itvdn.airport.petrov.dto.impl.ResponseRouteDTOImpl;
 import com.itvdn.airport.petrov.dto.mapper.RouteMapper;
 import com.itvdn.airport.petrov.entity.Route;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class RouteMapperImpl implements RouteMapper {
     @Override
     public ResponseRouteDTO routeToMap(Route route) {

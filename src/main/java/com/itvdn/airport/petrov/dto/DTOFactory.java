@@ -7,4 +7,5 @@ public interface DTOFactory {
     ResponseTicketDTO getResponseTicketDTO();
     ResponseRouteDTO getResponseRouteDTO();
     ResponseStateDTO getResponseStateDTO();
+    ResponseFlightDTO getResponseFlightDTO();
 }
