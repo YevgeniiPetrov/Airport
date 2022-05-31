@@ -8,7 +8,6 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,19 +28,25 @@ public class DataBase<T extends Essence> {
     }
 
     public T add(T object) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(object);
-        transaction.commit();
-        session.close();
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            session.save(object);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
         return object;
     }
 
     public Optional<T> get(int id, Class<T> type) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
         T object = null;
-        try {
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
             StringBuilder queryStr = new StringBuilder()
                     .append("select obj from ")
                     .append(type.getSimpleName())
@@ -51,17 +56,27 @@ public class DataBase<T extends Essence> {
             query.setParameter("id", id);
             object = (T) query.getSingleResult();
             transaction.commit();
-        } catch (Exception e) {}
-        session.close();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
         return Optional.ofNullable(object);
     }
 
     public T update(T object) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(object);
-        transaction.commit();
-        session.close();
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            session.update(object);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
         return object;
     }
 
@@ -72,10 +87,10 @@ public class DataBase<T extends Essence> {
     }
 
     public List<T> getAll(Class<T> type) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
         List<T> objects;
-        try {
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
             StringBuilder queryStr = new StringBuilder()
                     .append("select obj from ")
                     .append(type.getSimpleName())
@@ -84,9 +99,11 @@ public class DataBase<T extends Essence> {
             objects = query.getResultList();
             transaction.commit();
         } catch (Exception e) {
-            objects = new ArrayList<>();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
         }
-        session.close();
         return objects;
     }
 }

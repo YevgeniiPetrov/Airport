@@ -6,28 +6,21 @@ import com.itvdn.airport.petrov.dto.ResponsePassengerDTO;
 import com.itvdn.airport.petrov.dto.ResponseTicketDTO;
 import com.itvdn.airport.petrov.dto.impl.ResponseTicketDTOImpl;
 import com.itvdn.airport.petrov.dto.mapper.FlightMapper;
-import com.itvdn.airport.petrov.dto.mapper.MapperFactory;
 import com.itvdn.airport.petrov.dto.mapper.PassengerMapper;
 import com.itvdn.airport.petrov.dto.mapper.TicketMapper;
 import com.itvdn.airport.petrov.entity.Ticket;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class TicketMapperImpl implements TicketMapper {
-    private MapperFactory mapperFactory;
-
-    @Autowired
-    public TicketMapperImpl(@Lazy MapperFactory mapperFactory) {
-        this.mapperFactory = mapperFactory;
-    }
+    private PassengerMapper passengerMapper;
+    private FlightMapper flightMapper;
 
     @Override
     public ResponseTicketDTO ticketToMap(Ticket ticket) {
-        PassengerMapper passengerMapper = mapperFactory.getPassengerMapper();
         ResponsePassengerDTO passenger = passengerMapper.passengerToMap(ticket.getPassenger());
-        FlightMapper flightMapper = mapperFactory.getFlightMapper();
         ResponseFlightDTO flight = flightMapper.flightToMap(ticket.getFlight());
         return ResponseTicketDTOImpl.builder()
                 .id(ticket.getId())
