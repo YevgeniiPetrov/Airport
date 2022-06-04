@@ -1,4 +1,4 @@
-package com.itvdn.airport.petrov.dto;
+package com.itvdn.airport.petrov._dto;
 
 import java.time.LocalDate;
 

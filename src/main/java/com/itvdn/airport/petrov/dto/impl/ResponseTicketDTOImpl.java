@@ -1,7 +1,7 @@
 package com.itvdn.airport.petrov.dto.impl;
 
+import com.itvdn.airport.petrov._dto.ResponsePassengerDTO;
 import com.itvdn.airport.petrov.dto.ResponseFlightDTO;
-import com.itvdn.airport.petrov.dto.ResponsePassengerDTO;
 import com.itvdn.airport.petrov.dto.ResponseTicketDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,6 +1,6 @@
-package com.itvdn.airport.petrov.dto.impl;
+package com.itvdn.airport.petrov._dto.impl;
 
-import com.itvdn.airport.petrov.dto.ResponsePassengerDTO;
+import com.itvdn.airport.petrov._dto.RequestPassengerDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,9 +14,9 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponsePassengerDTOImpl implements ResponsePassengerDTO {
-    private int id;
+public class RequestPassengerDTOImpl implements RequestPassengerDTO {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
+    private Integer passport;
 }

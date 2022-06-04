@@ -1,12 +1,12 @@
 package com.itvdn.airport.petrov.dto.mapper.impl;
 
-import com.itvdn.airport.petrov.dto.RequestTicketDTO;
+import com.itvdn.airport.petrov._dto.ResponsePassengerDTO;
+import com.itvdn.airport.petrov._dto.mapper.PassengerMapper;
+import com.itvdn.airport.petrov.dto.RequestTicketCreationDTO;
 import com.itvdn.airport.petrov.dto.ResponseFlightDTO;
-import com.itvdn.airport.petrov.dto.ResponsePassengerDTO;
 import com.itvdn.airport.petrov.dto.ResponseTicketDTO;
 import com.itvdn.airport.petrov.dto.impl.ResponseTicketDTOImpl;
 import com.itvdn.airport.petrov.dto.mapper.FlightMapper;
-import com.itvdn.airport.petrov.dto.mapper.PassengerMapper;
 import com.itvdn.airport.petrov.dto.mapper.TicketMapper;
 import com.itvdn.airport.petrov.entity.Ticket;
 import lombok.AllArgsConstructor;
@@ -32,12 +32,12 @@ public class TicketMapperImpl implements TicketMapper {
     }
 
     @Override
-    public Ticket mapToTicket(RequestTicketDTO requestTicketDTO) {
+    public Ticket mapToTicket(RequestTicketCreationDTO requestTicketCreationDTO) {
         return Ticket.builder()
-                .number(requestTicketDTO.getNumber())
-                .place(requestTicketDTO.getPlace())
-                .passenger(requestTicketDTO.getPassenger())
-                .flight(requestTicketDTO.getFlight())
+                .number(requestTicketCreationDTO.getNumber())
+                .place(requestTicketCreationDTO.getPlace())
+                .passenger(requestTicketCreationDTO.getPassenger())
+                .flight(requestTicketCreationDTO.getFlight())
                 .build();
     }
 }

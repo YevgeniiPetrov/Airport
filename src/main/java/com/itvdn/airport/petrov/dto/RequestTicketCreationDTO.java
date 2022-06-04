@@ -3,7 +3,7 @@ package com.itvdn.airport.petrov.dto;
 import com.itvdn.airport.petrov.entity.Flight;
 import com.itvdn.airport.petrov.entity.Passenger;
 
-public interface RequestTicketDTO {
+public interface RequestTicketCreationDTO {
     Integer getNumber();
     Integer getPlace();
     Passenger getPassenger();
