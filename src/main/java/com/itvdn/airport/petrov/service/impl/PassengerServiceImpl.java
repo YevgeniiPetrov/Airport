@@ -1,8 +1,9 @@
 package com.itvdn.airport.petrov.service.impl;
 
-import com.itvdn.airport.petrov._dto.RequestPassengerDTO;
-import com.itvdn.airport.petrov._dto.ResponsePassengerDTO;
-import com.itvdn.airport.petrov._dto.mapper.PassengerMapper;
+import com.itvdn.airport.petrov.dto.RequestPassengerDTO;
+import com.itvdn.airport.petrov.dto.ResponseCompleted;
+import com.itvdn.airport.petrov.dto.ResponsePassengerDTO;
+import com.itvdn.airport.petrov.dto.mapper.PassengerMapper;
 import com.itvdn.airport.petrov.entity.Passenger;
 import com.itvdn.airport.petrov.repository.PassengerRepository;
 import com.itvdn.airport.petrov.service.PassengerService;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class PassengerServiceImpl implements PassengerService {
     private PassengerRepository passengerRepository;
     private PassengerMapper passengerMapper;
+    private ResponseCompleted responseCompleted;
 
     @Override
     public ResponsePassengerDTO get(int id) {
@@ -24,8 +26,8 @@ public class PassengerServiceImpl implements PassengerService {
     }
 
     @Override
-    public ResponsePassengerDTO add(RequestPassengerDTO requestPassengerDTO) {
-        Passenger passenger = passengerMapper.mapToPassenger(requestPassengerDTO);
-        return passengerMapper.passengerToMap(passengerRepository.add(passenger));
+    public ResponseCompleted add(RequestPassengerDTO requestPassengerDTO) {
+        passengerMapper.mapToPassenger(requestPassengerDTO);
+        return responseCompleted;
     }
 }

@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Component
 @Builder
@@ -18,8 +18,8 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class ResponseFlightDTOImpl implements ResponseFlightDTO {
     private int id;
-    private LocalTime departure;
-    private LocalTime arrival;
+    private LocalDateTime departure;
+    private LocalDateTime arrival;
     private ResponseRouteDTO route;
     private ResponseStateDTO state;
 }

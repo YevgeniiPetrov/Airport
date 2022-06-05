@@ -1,5 +1,6 @@
 package com.itvdn.airport.petrov.dto.mapper.impl;
 
+import com.itvdn.airport.petrov.dto.RequestEntityDTO;
 import com.itvdn.airport.petrov.dto.ResponseFlightDTO;
 import com.itvdn.airport.petrov.dto.ResponseRouteDTO;
 import com.itvdn.airport.petrov.dto.ResponseStateDTO;
@@ -27,6 +28,13 @@ public class FlightMapperImpl implements FlightMapper {
                 .arrival(flight.getArrival())
                 .route(route)
                 .state(state)
+                .build();
+    }
+
+    @Override
+    public Flight mapToFlight(RequestEntityDTO requestEntityDTO) {
+        return Flight.builder()
+                .id(requestEntityDTO.getId())
                 .build();
     }
 }

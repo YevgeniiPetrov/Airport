@@ -1,6 +1,7 @@
 package com.itvdn.airport.petrov.service.impl;
 
-import com.itvdn.airport.petrov.dto.RequestTicketCreationDTO;
+import com.itvdn.airport.petrov.dto.RequestTicketDTO;
+import com.itvdn.airport.petrov.dto.ResponseCompleted;
 import com.itvdn.airport.petrov.dto.ResponseTicketDTO;
 import com.itvdn.airport.petrov.dto.mapper.TicketMapper;
 import com.itvdn.airport.petrov.entity.Ticket;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class TicketServiceImpl implements TicketService {
     private TicketRepository ticketRepository;
     private TicketMapper ticketMapper;
+    private ResponseCompleted responseCompleted;
 
     @Override
     public ResponseTicketDTO get(int id) {
@@ -24,9 +26,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public ResponseTicketDTO add(RequestTicketCreationDTO requestTicketCreationDTO) {
-        Ticket ticket = ticketMapper.mapToTicket(requestTicketCreationDTO);
-        return ticketMapper.ticketToMap(ticketRepository.add(ticket));
+    public ResponseCompleted add(RequestTicketDTO requestTicketDTO) {
+        ticketMapper.mapToTicket(requestTicketDTO);
+        return responseCompleted;
     }
-
 }

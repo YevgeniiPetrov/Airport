@@ -1,4 +1,4 @@
-package com.itvdn.airport.petrov._dto;
+package com.itvdn.airport.petrov.dto;
 
 public interface ResponsePassengerDTO {
 }

@@ -1,12 +1,13 @@
-package com.itvdn.airport.petrov._dto.impl;
+package com.itvdn.airport.petrov.dto.impl;
 
-import com.itvdn.airport.petrov._dto.ResponsePassengerDTO;
+import com.itvdn.airport.petrov.dto.RequestPassengerDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Component
@@ -14,9 +15,13 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponsePassengerDTOImpl implements ResponsePassengerDTO {
-    private int id;
+public class RequestPassengerDTOImpl implements RequestPassengerDTO {
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private LocalDate birthDate;
+    @NotNull
+    private Integer passport;
 }
