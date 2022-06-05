@@ -4,8 +4,12 @@ import com.itvdn.airport.petrov.configuration.database.DataBase;
 import com.itvdn.airport.petrov.dao.FlightDAO;
 import com.itvdn.airport.petrov.entity.Flight;
 import lombok.AllArgsConstructor;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Query;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,5 +26,22 @@ public class FlightDAOImpl implements FlightDAO {
     @Override
     public List<Flight> getAll() {
         return dataBase.getAll(Flight.class);
+    }
+
+    @Override
+    public List<Flight> getAllBetweenDates(LocalDateTime dateFrom, LocalDateTime dateTo) {
+        Session session = dataBase.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        StringBuilder queryStr = new StringBuilder()
+                .append("select f ")
+                .append("from Flight f ")
+                .append("where f.departure between :dateFrom and :dateTo");
+        Query query = session.createQuery(queryStr.toString());
+        query.setParameter("dateFrom", dateFrom);
+        query.setParameter("dateTo", dateTo);
+        List<Flight> list = query.getResultList();
+        transaction.commit();
+        session.close();
+        return list;
     }
 }
