@@ -1,13 +1,11 @@
 package com.itvdn.airport.petrov.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Component
 @Builder
@@ -15,6 +13,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestTicketDTO {
+    @Setter
+    private Integer number;
+    @Setter
+    private LocalDateTime creationDate;
     @NotNull
     private Integer place;
     @NotNull

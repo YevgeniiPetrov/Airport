@@ -11,4 +11,5 @@ public interface TicketMapper {
     ResponseTicketDTO ticketToMap(Ticket ticket);
     Ticket mapToTicket(RequestTicketDTO requestTicketDTO);
     List<RequestTicketDTO> mapToMap(RequestPassengerTicketsDTO requestPassengerTicketsDTO);
+    List<ResponseTicketDTO> ticketsToMap(List<Ticket> tickets);
 }

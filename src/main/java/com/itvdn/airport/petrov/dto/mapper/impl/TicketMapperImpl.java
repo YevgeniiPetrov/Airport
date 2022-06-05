@@ -37,9 +37,9 @@ public class TicketMapperImpl implements TicketMapper {
     public Ticket mapToTicket(RequestTicketDTO requestTicketDTO) {
         Passenger passenger = passengerMapper.mapToPassenger(requestTicketDTO.getPassenger());
         Flight flight = flightMapper.mapToFlight(requestTicketDTO.getFlight());
-        Integer number = generateNumberTicket(requestTicketDTO.getPlace(), passenger, flight);
         return Ticket.builder()
-                .number(number)
+                .creationDate(requestTicketDTO.getCreationDate())
+                .number(requestTicketDTO.getNumber())
                 .place(requestTicketDTO.getPlace())
                 .passenger(passenger)
                 .flight(flight)
@@ -60,7 +60,18 @@ public class TicketMapperImpl implements TicketMapper {
         return ticketDTOList;
     }
 
-    private Integer generateNumberTicket(int place, Passenger passenger, Flight flight) {
-        return place * 100 + passenger.getId() * 10 + flight.getId();
+    @Override
+    public List<ResponseTicketDTO> ticketsToMap(List<Ticket> tickets) {
+        List<ResponseTicketDTO> ticketDTOList = new ArrayList<>();
+        for (Ticket ticket : tickets) {
+            ticketDTOList.add(ResponseTicketDTOImpl.builder()
+                    .id(ticket.getId())
+                    .number(ticket.getNumber())
+                    .place(ticket.getPlace())
+                    .passenger(passengerMapper.passengerToMap(ticket.getPassenger()))
+                    .flight(flightMapper.flightToMap(ticket.getFlight()))
+                    .build());
+        }
+        return ticketDTOList;
     }
 }

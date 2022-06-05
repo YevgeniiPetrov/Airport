@@ -10,6 +10,8 @@ import com.itvdn.airport.petrov.service.TicketService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,7 +29,26 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public ResponseCompleted add(RequestTicketDTO requestTicketDTO) {
+        setTicketNumber(requestTicketDTO);
+        setTicketCreationDate(requestTicketDTO);
         ticketRepository.add(ticketMapper.mapToTicket(requestTicketDTO));
         return responseCompleted;
+    }
+
+    @Override
+    public List<ResponseTicketDTO> getTicketsBetweenDates(LocalDateTime dateFrom, LocalDateTime dateTo) {
+        List<Ticket> tickets = ticketRepository.getAllBetweenDates(dateFrom, dateTo);
+        return ticketMapper.ticketsToMap(tickets);
+    }
+
+    private void setTicketNumber(RequestTicketDTO requestTicketDTO) {
+        Integer number = requestTicketDTO.getPlace() * 100
+                + requestTicketDTO.getPassenger().getId() * 10
+                + requestTicketDTO.getFlight().getId();
+        requestTicketDTO.setNumber(number);
+    }
+
+    private void setTicketCreationDate(RequestTicketDTO requestTicketDTO) {
+        requestTicketDTO.setCreationDate(LocalDateTime.now());
     }
 }
