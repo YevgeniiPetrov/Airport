@@ -1,9 +1,6 @@
 package com.itvdn.airport.petrov.dto.mapper.impl;
 
-import com.itvdn.airport.petrov.dto.RequestTicketDTO;
-import com.itvdn.airport.petrov.dto.ResponseFlightDTO;
-import com.itvdn.airport.petrov.dto.ResponsePassengerDTO;
-import com.itvdn.airport.petrov.dto.ResponseTicketDTO;
+import com.itvdn.airport.petrov.dto.*;
 import com.itvdn.airport.petrov.dto.impl.ResponseTicketDTOImpl;
 import com.itvdn.airport.petrov.dto.mapper.FlightMapper;
 import com.itvdn.airport.petrov.dto.mapper.PassengerMapper;
@@ -13,6 +10,9 @@ import com.itvdn.airport.petrov.entity.Passenger;
 import com.itvdn.airport.petrov.entity.Ticket;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -44,6 +44,20 @@ public class TicketMapperImpl implements TicketMapper {
                 .passenger(passenger)
                 .flight(flight)
                 .build();
+    }
+
+    @Override
+    public List<RequestTicketDTO> mapToMap(RequestPassengerTicketsDTO requestPassengerTicketsDTO) {
+        List<RequestTicketDTO> ticketDTOList = new ArrayList<>();
+        RequestEntityDTO passenger = requestPassengerTicketsDTO.getPassenger();
+        for (RequestPassengerTicketDTO requestPassengerTicketDTO: requestPassengerTicketsDTO.getTickets()) {
+            ticketDTOList.add(RequestTicketDTO.builder()
+                    .place(requestPassengerTicketDTO.getPlace())
+                    .passenger(passenger)
+                    .flight(requestPassengerTicketDTO.getFlight())
+                    .build());
+        }
+        return ticketDTOList;
     }
 
     private Integer generateNumberTicket(int place, Passenger passenger, Flight flight) {

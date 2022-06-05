@@ -1,15 +1,16 @@
 package com.itvdn.airport.petrov.service.impl;
 
-import com.itvdn.airport.petrov.dto.RequestPassengerDTO;
-import com.itvdn.airport.petrov.dto.ResponseCompleted;
-import com.itvdn.airport.petrov.dto.ResponsePassengerDTO;
+import com.itvdn.airport.petrov.dto.*;
 import com.itvdn.airport.petrov.dto.mapper.PassengerMapper;
+import com.itvdn.airport.petrov.dto.mapper.TicketMapper;
 import com.itvdn.airport.petrov.entity.Passenger;
 import com.itvdn.airport.petrov.repository.PassengerRepository;
 import com.itvdn.airport.petrov.service.PassengerService;
+import com.itvdn.airport.petrov.service.TicketService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,7 +18,9 @@ import java.util.Optional;
 public class PassengerServiceImpl implements PassengerService {
     private PassengerRepository passengerRepository;
     private PassengerMapper passengerMapper;
+    private TicketMapper ticketMapper;
     private ResponseCompleted responseCompleted;
+    private TicketService ticketService;
 
     @Override
     public ResponsePassengerDTO get(int id) {
@@ -27,7 +30,14 @@ public class PassengerServiceImpl implements PassengerService {
 
     @Override
     public ResponseCompleted add(RequestPassengerDTO requestPassengerDTO) {
-        passengerMapper.mapToPassenger(requestPassengerDTO);
+        passengerRepository.add(passengerMapper.mapToPassenger(requestPassengerDTO));
+        return responseCompleted;
+    }
+
+    @Override
+    public ResponseCompleted addTickets(RequestPassengerTicketsDTO requestPassengerTicketsDTO) {
+        List<RequestTicketDTO> ticketDTOList = ticketMapper.mapToMap(requestPassengerTicketsDTO);
+        ticketDTOList.stream().forEach(ticketService::add);
         return responseCompleted;
     }
 }

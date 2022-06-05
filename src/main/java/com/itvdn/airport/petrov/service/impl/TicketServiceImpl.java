@@ -27,7 +27,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public ResponseCompleted add(RequestTicketDTO requestTicketDTO) {
-        ticketMapper.mapToTicket(requestTicketDTO);
+        ticketRepository.add(ticketMapper.mapToTicket(requestTicketDTO));
         return responseCompleted;
     }
 }

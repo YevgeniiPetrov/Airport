@@ -1,20 +1,25 @@
-package com.itvdn.airport.petrov.dto.impl;
+package com.itvdn.airport.petrov.dto;
 
-import com.itvdn.airport.petrov.dto.RequestEntityDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Component
 @Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestEntityDTOImpl implements RequestEntityDTO {
+public class RequestPassengerTicketsDTO {
     @NotNull
-    private int id;
+    @Valid
+    private RequestEntityDTO passenger;
+    @NotNull
+    @Valid
+    private List<RequestPassengerTicketDTO> tickets;
 }

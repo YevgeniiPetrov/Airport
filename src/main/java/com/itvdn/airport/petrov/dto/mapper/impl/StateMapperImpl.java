@@ -4,11 +4,11 @@ import com.itvdn.airport.petrov.dto.ResponseStateDTO;
 import com.itvdn.airport.petrov.dto.impl.ResponseStateDTOImpl;
 import com.itvdn.airport.petrov.dto.mapper.StateMapper;
 import com.itvdn.airport.petrov.entity.State;
-import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
+@NoArgsConstructor
 public class StateMapperImpl implements StateMapper {
     @Override
     public ResponseStateDTO stateToMap(State state) {

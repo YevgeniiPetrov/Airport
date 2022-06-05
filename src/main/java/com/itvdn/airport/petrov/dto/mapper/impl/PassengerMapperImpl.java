@@ -6,9 +6,11 @@ import com.itvdn.airport.petrov.dto.ResponsePassengerDTO;
 import com.itvdn.airport.petrov.dto.impl.ResponsePassengerDTOImpl;
 import com.itvdn.airport.petrov.dto.mapper.PassengerMapper;
 import com.itvdn.airport.petrov.entity.Passenger;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@NoArgsConstructor
 public class PassengerMapperImpl implements PassengerMapper {
     @Override
     public ResponsePassengerDTO passengerToMap(Passenger passenger) {
@@ -33,7 +35,7 @@ public class PassengerMapperImpl implements PassengerMapper {
     @Override
     public Passenger mapToPassenger(RequestEntityDTO requestEntityDTO) {
         return Passenger.builder()
-                .id(requestEntityDTO.getId())
+                .id(requestEntityDTO.getId().intValue())
                 .build();
     }
 }
