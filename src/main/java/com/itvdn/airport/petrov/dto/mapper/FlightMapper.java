@@ -10,4 +10,5 @@ public interface FlightMapper {
     ResponseFlightDTO flightToMap(Flight flight);
     Flight mapToFlight(RequestEntityDTO requestEntityDTO);
     List<ResponseFlightDTO> flightsToMap(List<Flight> flights);
+    RequestEntityDTO flightToRequestEntityDTO(Flight flight);
 }

@@ -40,4 +40,10 @@ public class PassengerServiceImpl implements PassengerService {
         ticketDTOList.stream().forEach(ticketService::add);
         return responseCompleted;
     }
+
+    @Override
+    public ResponseCompleted delete(RequestEntityDTO requestEntityDTO) {
+        passengerRepository.delete(passengerMapper.mapToPassenger(requestEntityDTO));
+        return responseCompleted;
+    }
 }

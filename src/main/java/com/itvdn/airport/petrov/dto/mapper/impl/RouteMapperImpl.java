@@ -1,5 +1,6 @@
 package com.itvdn.airport.petrov.dto.mapper.impl;
 
+import com.itvdn.airport.petrov.dto.RequestEntityDTO;
 import com.itvdn.airport.petrov.dto.ResponseRouteDTO;
 import com.itvdn.airport.petrov.dto.impl.ResponseRouteDTOImpl;
 import com.itvdn.airport.petrov.dto.mapper.RouteMapper;
@@ -16,6 +17,13 @@ public class RouteMapperImpl implements RouteMapper {
                 .id(route.getId())
                 .from(route.getFrom())
                 .to(route.getTo())
+                .build();
+    }
+
+    @Override
+    public Route mapToRoute(RequestEntityDTO requestEntityDTO) {
+        return Route.builder()
+                .id(requestEntityDTO.getId().intValue())
                 .build();
     }
 }

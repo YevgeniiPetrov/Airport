@@ -55,4 +55,11 @@ public class FlightMapperImpl implements FlightMapper {
         }
         return flightDTOList;
     }
+
+    @Override
+    public RequestEntityDTO flightToRequestEntityDTO(Flight flight) {
+        return RequestEntityDTO.builder()
+                .id(flight.getId())
+                .build();
+    }
 }

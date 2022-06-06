@@ -3,6 +3,7 @@ package com.itvdn.airport.petrov.dao.impl;
 import com.itvdn.airport.petrov.configuration.database.DataBase;
 import com.itvdn.airport.petrov.dao.FlightDAO;
 import com.itvdn.airport.petrov.entity.Flight;
+import com.itvdn.airport.petrov.entity.Route;
 import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -39,6 +40,23 @@ public class FlightDAOImpl implements FlightDAO {
         Query query = session.createQuery(queryStr.toString());
         query.setParameter("dateFrom", dateFrom);
         query.setParameter("dateTo", dateTo);
+        List<Flight> list = query.getResultList();
+        transaction.commit();
+        session.close();
+        return list;
+    }
+
+    @Override
+    public List<Flight> getAllByRoute(Route route) {
+        Session session = dataBase.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        StringBuilder queryStr = new StringBuilder()
+                .append("select f ")
+                .append("from Flight f ")
+                .append("where f.route = :routeId ")
+                .append("and f.removed = false");
+        Query query = session.createQuery(queryStr.toString());
+        query.setParameter("routeId", route.getId());
         List<Flight> list = query.getResultList();
         transaction.commit();
         session.close();

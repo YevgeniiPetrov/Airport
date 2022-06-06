@@ -2,6 +2,7 @@ package com.itvdn.airport.petrov.repository.impl;
 
 import com.itvdn.airport.petrov.dao.DAOFactory;
 import com.itvdn.airport.petrov.entity.Flight;
+import com.itvdn.airport.petrov.entity.Route;
 import com.itvdn.airport.petrov.repository.FlightRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -43,5 +44,10 @@ public class FlightRepositoryImpl implements FlightRepository {
     @Override
     public List<Flight> getAllBetweenDates(LocalDateTime dateFrom, LocalDateTime dateTo) {
         return DAOFactory.getFlightDAO().getAllBetweenDates(dateFrom, dateTo);
+    }
+
+    @Override
+    public List<Flight> getAllByRoute(Route route) {
+        return DAOFactory.getFlightDAO().getAllByRoute(route);
     }
 }

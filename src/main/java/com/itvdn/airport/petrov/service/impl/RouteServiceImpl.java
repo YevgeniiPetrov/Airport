@@ -2,33 +2,33 @@ package com.itvdn.airport.petrov.service.impl;
 
 import com.itvdn.airport.petrov.dto.RequestEntityDTO;
 import com.itvdn.airport.petrov.dto.ResponseCompleted;
-import com.itvdn.airport.petrov.dto.ResponseFlightDTO;
 import com.itvdn.airport.petrov.dto.mapper.FlightMapper;
-import com.itvdn.airport.petrov.entity.Flight;
+import com.itvdn.airport.petrov.dto.mapper.RouteMapper;
+import com.itvdn.airport.petrov.entity.Route;
 import com.itvdn.airport.petrov.repository.FlightRepository;
+import com.itvdn.airport.petrov.repository.RouteRepository;
 import com.itvdn.airport.petrov.service.FlightService;
+import com.itvdn.airport.petrov.service.RouteService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @Service
 @AllArgsConstructor
-public class FlightServiceImpl implements FlightService {
+public class RouteServiceImpl implements RouteService {
+    private RouteRepository routeRepository;
     private FlightRepository flightRepository;
+    private RouteMapper routeMapper;
     private FlightMapper flightMapper;
+    private FlightService flightService;
     private ResponseCompleted responseCompleted;
 
     @Override
-    public List<ResponseFlightDTO> getFlightsBetweenDates(LocalDateTime dateFrom, LocalDateTime dateTo) {
-        List<Flight> flights = flightRepository.getAllBetweenDates(dateFrom, dateTo);
-        return flightMapper.flightsToMap(flights);
-    }
-
-    @Override
     public ResponseCompleted delete(RequestEntityDTO requestEntityDTO) {
-        flightRepository.delete(flightMapper.mapToFlight(requestEntityDTO));
+        Route route = routeMapper.mapToRoute(requestEntityDTO);
+        flightRepository.getAllByRoute(route).stream()
+                .map(flightMapper::flightToRequestEntityDTO)
+                .forEach(flightService::delete);
+        routeRepository.delete(route);
         return responseCompleted;
     }
 }
