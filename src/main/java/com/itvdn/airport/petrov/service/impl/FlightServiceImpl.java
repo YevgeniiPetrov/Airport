@@ -1,6 +1,7 @@
 package com.itvdn.airport.petrov.service.impl;
 
 import com.itvdn.airport.petrov.dto.RequestEntityDTO;
+import com.itvdn.airport.petrov.dto.RequestFlightChangeDeparture;
 import com.itvdn.airport.petrov.dto.ResponseCompleted;
 import com.itvdn.airport.petrov.dto.ResponseFlightDTO;
 import com.itvdn.airport.petrov.dto.mapper.FlightMapper;
@@ -27,8 +28,22 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    public ResponseCompleted delete(Flight flight) {
+        flightRepository.delete(flight);
+        return responseCompleted;
+    }
+
+    @Override
     public ResponseCompleted delete(RequestEntityDTO requestEntityDTO) {
-        flightRepository.delete(flightMapper.mapToFlight(requestEntityDTO));
+        Flight flight = flightRepository.get(requestEntityDTO.getId()).get();
+        return delete(flight);
+    }
+
+    @Override
+    public ResponseCompleted update(RequestFlightChangeDeparture requestFlightChangeDeparture) {
+        Flight flight = flightRepository.get(requestFlightChangeDeparture.getId()).get();
+        flight.setDeparture(requestFlightChangeDeparture.getDeparture());
+        flightRepository.update(flight);
         return responseCompleted;
     }
 }

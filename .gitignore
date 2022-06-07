@@ -3,3 +3,5 @@
 .idea/
 *.iml
 *.xml
+!pom.xml
+!/src/main/resources/applicationContext.xml

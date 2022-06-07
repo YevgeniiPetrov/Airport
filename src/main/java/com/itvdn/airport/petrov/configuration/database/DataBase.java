@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,13 @@ public class DataBase<T extends Essence> {
             query.setParameter("id", id);
             object = (T) query.getSingleResult();
             transaction.commit();
+        } catch (NoResultException e) {
+            throw new NoResultException(new StringBuilder()
+                    .append(type.getSimpleName())
+                    .append(" with id ")
+                    .append(id)
+                    .append(" does not exist")
+                    .toString());
         } catch (Exception e) {
             e.printStackTrace();
         }

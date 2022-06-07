@@ -48,18 +48,19 @@ public class FlightDAOImpl implements FlightDAO {
 
     @Override
     public List<Flight> getAllByRoute(Route route) {
-        Session session = dataBase.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        StringBuilder queryStr = new StringBuilder()
-                .append("select f ")
-                .append("from Flight f ")
-                .append("where f.route = :routeId ")
-                .append("and f.removed = false");
-        Query query = session.createQuery(queryStr.toString());
-        query.setParameter("routeId", route.getId());
-        List<Flight> list = query.getResultList();
-        transaction.commit();
-        session.close();
-        return list;
+        return getAll().stream().filter(f -> f.getRoute().getId() == route.getId()).toList();
+//        Session session = dataBase.getSessionFactory().openSession();
+//        Transaction transaction = session.beginTransaction();
+//        StringBuilder queryStr = new StringBuilder()
+//                .append("select f ")
+//                .append("from Flight f ")
+//                .append("where f.route = :routeId ")
+//                .append("and f.removed = false");
+//        Query query = session.createQuery(queryStr.toString());
+//        query.setParameter("routeId", route.getId());
+//        List<Flight> list = query.getResultList();
+//        transaction.commit();
+//        session.close();
+//        return list;
     }
 }

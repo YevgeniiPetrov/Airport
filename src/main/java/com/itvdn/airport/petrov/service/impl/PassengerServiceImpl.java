@@ -43,7 +43,8 @@ public class PassengerServiceImpl implements PassengerService {
 
     @Override
     public ResponseCompleted delete(RequestEntityDTO requestEntityDTO) {
-        passengerRepository.delete(passengerMapper.mapToPassenger(requestEntityDTO));
+        Passenger passenger = passengerRepository.get(requestEntityDTO.getId()).get();
+        passengerRepository.delete(passenger);
         return responseCompleted;
     }
 }
