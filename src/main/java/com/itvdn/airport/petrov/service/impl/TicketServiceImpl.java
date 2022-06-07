@@ -41,6 +41,12 @@ public class TicketServiceImpl implements TicketService {
         return ticketMapper.ticketsToMap(tickets);
     }
 
+    @Override
+    public ResponseCompleted delete(Ticket ticket) {
+        ticketRepository.delete(ticket);
+        return responseCompleted;
+    }
+
     private void setTicketNumber(RequestTicketDTO requestTicketDTO) {
         Integer number = requestTicketDTO.getPlace() * 100
                 + requestTicketDTO.getPassenger().getId() * 10

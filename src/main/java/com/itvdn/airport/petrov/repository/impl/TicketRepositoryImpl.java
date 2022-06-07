@@ -1,6 +1,7 @@
 package com.itvdn.airport.petrov.repository.impl;
 
 import com.itvdn.airport.petrov.dao.DAOFactory;
+import com.itvdn.airport.petrov.entity.Flight;
 import com.itvdn.airport.petrov.entity.Ticket;
 import com.itvdn.airport.petrov.repository.TicketRepository;
 import lombok.AllArgsConstructor;
@@ -43,5 +44,10 @@ public class TicketRepositoryImpl implements TicketRepository {
     @Override
     public List<Ticket> getAllBetweenDates(LocalDateTime dateFrom, LocalDateTime dateTo) {
         return DAOFactory.getTicketDAO().getAllBetweenDates(dateFrom, dateTo);
+    }
+
+    @Override
+    public List<Ticket> getAllByFlight(Flight flight) {
+        return DAOFactory.getTicketDAO().getAllByFlight(flight);
     }
 }

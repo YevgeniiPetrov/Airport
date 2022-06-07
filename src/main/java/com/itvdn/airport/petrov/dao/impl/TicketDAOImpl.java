@@ -2,6 +2,7 @@ package com.itvdn.airport.petrov.dao.impl;
 
 import com.itvdn.airport.petrov.configuration.database.DataBase;
 import com.itvdn.airport.petrov.dao.TicketDAO;
+import com.itvdn.airport.petrov.entity.Flight;
 import com.itvdn.airport.petrov.entity.Ticket;
 import lombok.AllArgsConstructor;
 import org.hibernate.Session;
@@ -43,5 +44,10 @@ public class TicketDAOImpl implements TicketDAO {
         transaction.commit();
         session.close();
         return list;
+    }
+
+    @Override
+    public List<Ticket> getAllByFlight(Flight flight) {
+        return getAll().stream().filter(t -> t.getFlight().getId() == flight.getId()).toList();
     }
 }

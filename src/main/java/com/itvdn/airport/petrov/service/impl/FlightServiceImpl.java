@@ -7,6 +7,7 @@ import com.itvdn.airport.petrov.dto.ResponseFlightDTO;
 import com.itvdn.airport.petrov.dto.mapper.FlightMapper;
 import com.itvdn.airport.petrov.entity.Flight;
 import com.itvdn.airport.petrov.repository.FlightRepository;
+import com.itvdn.airport.petrov.repository.TicketRepository;
 import com.itvdn.airport.petrov.service.FlightService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class FlightServiceImpl implements FlightService {
     private FlightRepository flightRepository;
+    private TicketRepository ticketRepository;
     private FlightMapper flightMapper;
     private ResponseCompleted responseCompleted;
 
@@ -29,6 +31,8 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public ResponseCompleted delete(Flight flight) {
+        ticketRepository.getAllByFlight(flight).stream()
+                        .forEach(ticketRepository::delete);
         flightRepository.delete(flight);
         return responseCompleted;
     }
