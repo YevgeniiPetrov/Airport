@@ -5,12 +5,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Component;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class DataBase<T extends Essence> {
     private static SessionFactory sessionFactory;
 
@@ -27,19 +30,20 @@ public class DataBase<T extends Essence> {
     }
 
     public T add(T object) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(object);
-        transaction.commit();
-        session.close();
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.save(object);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return object;
     }
 
     public Optional<T> get(int id, Class<T> type) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
         T object = null;
-        try {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
             StringBuilder queryStr = new StringBuilder()
                     .append("select obj from ")
                     .append(type.getSimpleName())
@@ -49,17 +53,27 @@ public class DataBase<T extends Essence> {
             query.setParameter("id", id);
             object = (T) query.getSingleResult();
             transaction.commit();
-        } catch (Exception e) {}
-        session.close();
+        } catch (NoResultException e) {
+            throw new NoResultException(new StringBuilder()
+                    .append(type.getSimpleName())
+                    .append(" with id ")
+                    .append(id)
+                    .append(" does not exist")
+                    .toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return Optional.ofNullable(object);
     }
 
     public T update(T object) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(object);
-        transaction.commit();
-        session.close();
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.update(object);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return object;
     }
 
@@ -70,10 +84,9 @@ public class DataBase<T extends Essence> {
     }
 
     public List<T> getAll(Class<T> type) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
         List<T> objects;
-        try {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
             StringBuilder queryStr = new StringBuilder()
                     .append("select obj from ")
                     .append(type.getSimpleName())
@@ -82,9 +95,9 @@ public class DataBase<T extends Essence> {
             objects = query.getResultList();
             transaction.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             objects = new ArrayList<>();
         }
-        session.close();
         return objects;
     }
 }

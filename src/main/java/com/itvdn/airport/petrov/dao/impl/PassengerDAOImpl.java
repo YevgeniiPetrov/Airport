@@ -2,32 +2,37 @@ package com.itvdn.airport.petrov.dao.impl;
 
 import com.itvdn.airport.petrov.configuration.database.DataBase;
 import com.itvdn.airport.petrov.dao.PassengerDAO;
-import com.itvdn.airport.petrov.entity.Employee;
 import com.itvdn.airport.petrov.entity.Flight;
 import com.itvdn.airport.petrov.entity.Passenger;
 import com.itvdn.airport.petrov.entity.State;
+import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.*;
 import java.util.List;
 import java.util.Optional;
 
+@Component
+@AllArgsConstructor
 public class PassengerDAOImpl implements PassengerDAO {
+    private DataBase<Passenger> dataBase;
+
     @Override
     public Optional<Passenger> get(int id) {
-        return new DataBase<Passenger>().get(id, Passenger.class);
+        return dataBase.get(id, Passenger.class);
     }
 
     @Override
     public List<Passenger> getAll() {
-        return new DataBase<Passenger>().getAll(Passenger.class);
+        return dataBase.getAll(Passenger.class);
     }
 
     @Override
     public List<Passenger> getAllArrivedByCriteria() {
-        Session session = new DataBase<Employee>().getSessionFactory().openSession();
+        Session session = dataBase.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<Passenger> criteriaQuery = criteriaBuilder.createQuery(Passenger.class);
@@ -49,7 +54,7 @@ public class PassengerDAOImpl implements PassengerDAO {
 
     @Override
     public List<Passenger> getAllArrivedByHQL() {
-        Session session = new DataBase<Employee>().getSessionFactory().openSession();
+        Session session = dataBase.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         StringBuilder queryStr = new StringBuilder()
                 .append("select p ")

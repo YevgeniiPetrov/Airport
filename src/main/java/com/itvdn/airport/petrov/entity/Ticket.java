@@ -3,6 +3,7 @@ package com.itvdn.airport.petrov.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -15,6 +16,8 @@ public class Ticket extends Essence {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private int id;
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
     private Integer number;
     private Integer place;
     @ManyToOne(targetEntity = Passenger.class)

@@ -3,7 +3,7 @@ package com.itvdn.airport.petrov.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -17,8 +17,8 @@ public class Flight extends Essence {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private int id;
-    private LocalTime departure;
-    private LocalTime arrival;
+    private LocalDateTime departure;
+    private LocalDateTime arrival;
     private Boolean removed;
     @ManyToOne(targetEntity = Route.class)
     private Route route;

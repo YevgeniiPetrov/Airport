@@ -1,35 +1,41 @@
 package com.itvdn.airport.petrov.repository.impl;
 
-import com.itvdn.airport.petrov.dao.impl.DAOFactoryImpl;
+import com.itvdn.airport.petrov.dao.DAOFactory;
 import com.itvdn.airport.petrov.entity.Route;
 import com.itvdn.airport.petrov.repository.RouteRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
+@AllArgsConstructor
 public class RouteRepositoryImpl implements RouteRepository {
+    private DAOFactory DAOFactory;
+
     @Override
     public Route add(Route object) {
-        return new DAOFactoryImpl().getRouteDAO().add(object);
+        return DAOFactory.getRouteDAO().add(object);
     }
 
     @Override
     public Optional<Route> get(int id) {
-        return new DAOFactoryImpl().getRouteDAO().get(id);
+        return DAOFactory.getRouteDAO().get(id);
     }
 
     @Override
     public Route update(Route object) {
-        return new DAOFactoryImpl().getRouteDAO().update(object);
+        return DAOFactory.getRouteDAO().update(object);
     }
 
     @Override
     public Boolean delete(Route object) {
-        return new DAOFactoryImpl().getRouteDAO().delete(object);
+        return DAOFactory.getRouteDAO().delete(object);
     }
 
     @Override
     public List<Route> getAll() {
-        return new DAOFactoryImpl().getRouteDAO().getAll();
+        return DAOFactory.getRouteDAO().getAll();
     }
 }
